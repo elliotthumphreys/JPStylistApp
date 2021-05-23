@@ -30,6 +30,7 @@ font-size: 1.5rem;
 font-variant-caps: all-petite-caps;
 color: white;
 padding: 0.3em 0;
+font-family: -apple-system, Roboto, sans-serif, serif;
 
 :hover {
   text-decoration: overline;

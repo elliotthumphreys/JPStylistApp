@@ -65,6 +65,7 @@ export const FullScreenNavMenuProvider = ({ children }) => {
 
     return (
         <FullScreenNavMenuContext.Provider value={{ open, toggleOpen }}>
+            <FullScreenMenu />
             {children}
         </FullScreenNavMenuContext.Provider>
     )

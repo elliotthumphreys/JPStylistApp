@@ -5,7 +5,6 @@ import SocialBanner from "../components/SocialBanner"
 import NavMenuList from "../components/NavMenuList"
 import LandingPageSlideShow from "../components/LandingPageSlideShow"
 import { DesktopOnly, MobileOrTabletOnly } from "../components/MediaQueryWrapper"
-import FullScreenMenu, { FullScreenNavMenuProvider } from "../components/FullScreenMenu"
 
 // styles
 const pageStyles = {
@@ -46,10 +45,8 @@ const IndexPage = () => {
   const imageContainerRef = React.useRef(false);
 
   return (
-    <FullScreenNavMenuProvider>
       <main style={pageStyles}>
         <title>Home Page</title>
-        <FullScreenMenu />
         <div style={ContainerStyles}>
           {/* On desktop nav bar will be visible, and mobile and tablet this will be hidden */}
           <DesktopOnly>
@@ -61,8 +58,7 @@ const IndexPage = () => {
           {/* This will have a button to open a full screen nav menu */}
           <SocialBanner />
 
-          {/* On desktop this will be a standalone image, on mobile and table this will be a 
-            slideshow showing all the different types of work JPS does */}
+          {/* On desktop this will be a standalone image*/}
           <DesktopOnly>
             <div style={FocalImageStyles} ref={imageContainerRef}>
               <LandscapeBackground parentRef={imageContainerRef} />
@@ -76,7 +72,6 @@ const IndexPage = () => {
           </MobileOrTabletOnly>
         </div>
       </main>
-    </FullScreenNavMenuProvider>
   )
 }
 
