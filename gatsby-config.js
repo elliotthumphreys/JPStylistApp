@@ -10,5 +10,17 @@ module.exports = {
         trackingId: "G-HMWCQHNKFD",
       },
     },
+    {
+      resolve: `gatsby-plugin-global-styles`,
+      options: {
+        pathToConfigModule: `src/styles/GlobalStyleComponent`,
+        props: {
+          theme: `src/styles/theme`,
+          other: {
+            light: true
+          }
+        }
+      },
+    },
   ],
 };
