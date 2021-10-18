@@ -1,4 +1,5 @@
 module.exports = {
+  pathPrefix: "/JPStylistApp",
   siteMetadata: {
     title: "JohnProctorStylist",
   },
