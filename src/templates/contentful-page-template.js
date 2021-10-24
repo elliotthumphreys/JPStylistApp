@@ -5,6 +5,7 @@ import * as React from "react"
 import NavMenuList from "../components/NavMenuList"
 // import LandingPageSlideShow from "../components/LandingPageSlideShow"
 import { DesktopOnly, MobileOrTabletOnly } from "../components/MediaQueryWrapper"
+import TextModelComponent from "../components/TextModelComponent"
 
 const pageStyles = {
   color: "#232129",
@@ -43,9 +44,9 @@ const ContentfulPageTemplate = ({ pageContext }) => {
   const {
     slug,
     pageTitle,
-    navbar: { links }
+    navbar: { links },
+    textContent
   } = pageContext;
-  const imageContainerRef = React.useRef(false);
 
   return (
     <main style={pageStyles}>
@@ -57,6 +58,8 @@ const ContentfulPageTemplate = ({ pageContext }) => {
             <NavMenuList links={links}/>
           </div>
         </DesktopOnly>
+
+        { textContent !== null ? <TextModelComponent rawContentfulContent={textContent.content} image={textContent.image}/> : undefined }
 
         {/* This will have a button to open a full screen nav menu */}
         {/* <SocialBanner /> */}

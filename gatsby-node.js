@@ -14,21 +14,6 @@ exports.createPages = async function ({ actions, graphql }) {
           node {
             slug
             pageTitle
-            gallery {
-              file {
-                url
-                fileName
-                contentType
-                details {
-                  image {
-                    height
-                    width
-                  }
-                }
-              }
-              description
-              title
-            }
             navbar {
               links {
                 ... on ContentfulLogoModel {
@@ -75,7 +60,6 @@ exports.createPages = async function ({ actions, graphql }) {
         }
       }
     }
-        
     `)
     data.allContentfulPageModel.edges.forEach(edge => {
       const slug = edge.node.slug

@@ -37,15 +37,16 @@ text-decoration: none;
 }
 `
 
-// markup
 const NavMenuList = ({ links, useLightLogo = false }) => {
   return (
     <>
       {links.map(link => {
         if(link.slug !== undefined)
-          return <StyledNavLink href={`/${link.slug}`}>{link.displayName}</StyledNavLink>
+          return <StyledNavLink key={link.slug} href={`/${link.slug}`}>{link.displayName}</StyledNavLink>
 
-        return <StyledNavBarLogo src={useLightLogo ? link.whiteLogo.file.url : link.blackLogo.file.url} />
+        return <StyledNavBarLogo
+                  key={useLightLogo ? link.whiteLogo.file.url : link.blackLogo.file.url}
+                  src={useLightLogo ? link.whiteLogo.file.url : link.blackLogo.file.url} />
       })}
     </>
   )
