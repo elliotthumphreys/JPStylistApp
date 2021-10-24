@@ -1,6 +1,4 @@
 import * as React from "react"
-import logo from "../images/logoBlack.svg"
-import lightLogo from "../images/logoWhite.svg"
 import styled from "styled-components"
 
 // styles
@@ -31,6 +29,7 @@ font-variant-caps: all-petite-caps;
 color: white;
 padding: 0.3em 0;
 font-family: -apple-system, Roboto, sans-serif, serif;
+text-decoration: none;
 
 :hover {
   text-decoration: overline;
@@ -39,18 +38,15 @@ font-family: -apple-system, Roboto, sans-serif, serif;
 `
 
 // markup
-const NavMenuList = ({ useLightLogo = false }) => {
+const NavMenuList = ({ links, useLightLogo = false }) => {
   return (
     <>
-      <StyledNavLink>About</StyledNavLink>
-      <StyledNavLink>Womens Book</StyledNavLink>
-      <StyledNavLink>Mens Book</StyledNavLink>
-      <StyledNavLink>Sports</StyledNavLink>
-      <StyledNavLink>Commercial</StyledNavLink>
-      <StyledNavLink>Still life</StyledNavLink>
-      <StyledNavLink>Kidswear</StyledNavLink>
-      <StyledNavBarLogo src={useLightLogo ? lightLogo : logo} />
-      <StyledNavLink>Contact</StyledNavLink>
+      {links.map(link => {
+        if(link.slug !== undefined)
+          return <StyledNavLink href={`/${link.slug}`}>{link.displayName}</StyledNavLink>
+
+        return <StyledNavBarLogo src={useLightLogo ? link.whiteLogo.file.url : link.blackLogo.file.url} />
+      })}
     </>
   )
 }

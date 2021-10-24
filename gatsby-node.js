@@ -8,45 +8,74 @@ exports.createPages = async function ({ actions, graphql }) {
     })
 
     const { data } = await graphql(`
-    query {
-        allContentfulPageModel {
-          edges {
-            node {
-              slug
-              pageTitle
-              gallery {
+    {
+      allContentfulPageModel {
+        edges {
+          node {
+            slug
+            pageTitle
+            gallery {
+              file {
+                url
+                fileName
+                contentType
+                details {
+                  image {
+                    height
+                    width
+                  }
+                }
+              }
+              description
+              title
+            }
+            navbar {
+              links {
+                ... on ContentfulLogoModel {
+                  blackLogo {
+                    file {
+                      url
+                    }
+                  }
+                  whiteLogo {
+                    file {
+                      url
+                    }
+                  }
+                }
+                ... on ContentfulSlugModel {
+                  displayName
+                  slug
+                }
+              }
+              displayName
+            }
+            socials {
+              displayName
+              links {
+                displayName
+                link
+              }
+            }
+            textContent {
+              image {
+                title
+                description
                 file {
                   url
                   fileName
                   contentType
-                  details {
-                    image {
-                      height
-                      width
-                    }
-                  }
                 }
-                description
-                title
               }
-              navbar {
-                links {
-                  slug
-                  displayName
-                }
-                displayName
-              }
-              socials {
-                displayName
-                links {
-                  displayName
-                  link
-                }
+              content {
+                raw
               }
             }
           }
         }
       }
+    }
+        
     `)
     data.allContentfulPageModel.edges.forEach(edge => {
       const slug = edge.node.slug
