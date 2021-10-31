@@ -25,6 +25,7 @@
     "gatsby": "^3.4.1",
     "gatsby-plugin-global-styles": "^1.0.17",
     "gatsby-plugin-google-analytics": "^3.5.0",
+    "gatsby-plugin-image": "^2.0.0",
     "gatsby-plugin-styled-components": "^4.5.0",
     "gatsby-source-contentful": "^6.0.0",
     "react": "^17.0.1",
