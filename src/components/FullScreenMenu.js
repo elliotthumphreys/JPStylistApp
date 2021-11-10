@@ -169,6 +169,7 @@ const GridItem2 = styled.div`
     padding-top: 30px;
     padding-bottom: 30px;
     border-bottom: 1px solid #333;
+    display: flex;
 
     @media screen and (max-width: 991px){
         display: none;
@@ -265,6 +266,11 @@ const StyledHeading = styled.h2`
         letter-spacing: 1px;
     }
 `
+const StyledImage = styled.img`
+    height: 260px;
+    margin: auto;
+    display: block;
+`
 export const FullScreenMenu = () => {
     const { open } = useContext(FullScreenNavMenuContext);
     const [ showContent, setShowContent ] = useState(open);
@@ -283,10 +289,10 @@ export const FullScreenMenu = () => {
             {/* TODO:: add all the nav menu contents */}
             <GridContiner showContent={showContent}>
                 <GridItem1>
-                    <StyledHeading>Example title with august font</StyledHeading>
+                    <StyledHeading>john proctor stylist</StyledHeading>
                 </GridItem1>
                 <GridItem2>
-
+                    <StyledImage src="https://images.ctfassets.net/dp3dhjthjc5k/5dsyQNbMaHZiPYooxNXSGY/87bd33296ffda3e511b6e236d8ba8a6f/logoWhite-43911d75e3e207f3b3b2dbfae29fe6fc.svg" />
                 </GridItem2>
                 <GridItem3>
 
