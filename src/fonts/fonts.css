@@ -1,0 +1,11 @@
+@font-face {
+    font-family: 'August';
+    font-weight: 700;
+    src: url('602d0d76ac6fe41e789e0053augustbold.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'August';
+    font-weight: 400;
+    src: url('602d0d5a31ff505b6c2f05b7augustlight.ttf') format('truetype');
+}

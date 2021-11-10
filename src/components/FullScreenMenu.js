@@ -1,5 +1,6 @@
 import React, { useContext, useState, createContext, useEffect } from 'react';
 import styled from 'styled-components';
+import '../fonts/fonts.css'
 
 const PositioningContainer = styled.div`
     top: 0;
@@ -233,15 +234,36 @@ const GridItem4 = styled.div`
         border-right: none;
     }
 `
-const StyledP = styled.p`
+const StyledHeading = styled.h2`
     color: white;
     margin: 0px;
     margin-right: 10%;
     margin-left: 5%;
-    font-size: min(111px, 7.7vw);
-    line-height: 95%;
     font-weight: 700;
+    font-size: min(111px, 7.7vw);
     text-transform: uppercase;
+    font-family: 'August', sans-serif;
+
+    @media screen and (max-width: 991px)
+    {
+        font-size: 90px;
+        line-height: 121%;
+        text-align: left;
+    }
+
+    @media screen and (max-width: 767px)
+    {
+        max-width: 70%;
+        margin-right: 0%;
+        font-size: 60px;
+    }
+
+    @media screen and (max-width: 479px)
+    {
+        max-width: 250px;
+        font-size: 42px;
+        letter-spacing: 1px;
+    }
 `
 export const FullScreenMenu = () => {
     const { open } = useContext(FullScreenNavMenuContext);
@@ -261,7 +283,7 @@ export const FullScreenMenu = () => {
             {/* TODO:: add all the nav menu contents */}
             <GridContiner showContent={showContent}>
                 <GridItem1>
-                    <StyledP>Example title with august font</StyledP>
+                    <StyledHeading>Example title with august font</StyledHeading>
                 </GridItem1>
                 <GridItem2>
 
