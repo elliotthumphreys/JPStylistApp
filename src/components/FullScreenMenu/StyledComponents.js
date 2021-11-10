@@ -246,16 +246,16 @@ export const SiteHeadingContainer = styled.div`
     position: absolute;
 `
 export const SiteHeading = styled.h1`
-    font-weight: 700;
-    font-size: 1.5em;
-    font-family: 'Cabin', sans-serif;
-    text-transform: lowercase;
     transform: rotateZ(90deg);
-    -webkit-transform: rotateZ(90deg);
-    color: white;
-    position: absolute;
-    transform-style: preserve-3d;   
-    top: 4.25em;
+    font-weight: 700;
+    font-size: 1.5em;   
+    top: 5.25em;
     left: -2.75em;
     letter-spacing: 1.5px;
+    margin: 0px;
+    font-family: 'Cabin', sans-serif;
+    text-transform: lowercase;
+    color: white;
+    position: fixed;
+    transform-style: preserve-3d;
 `

@@ -49,7 +49,7 @@ export const FullScreenMenuButton = () => {
     )
 }
 
-export const FullScreenMenu = () => {
+export const FullScreenMenu = ({logo, title}) => {
     const { open } = useContext(FullScreenNavMenuContext);
     const [ showContent, setShowContent ] = useState(open);
 
@@ -64,19 +64,18 @@ export const FullScreenMenu = () => {
 
     return (
         <FullScreenNavDiv open={open}>
-            {/* TODO:: add all the nav menu contents */}
             <GridContiner showContent={showContent}>
                 <GridItem1>
-                    <StyledHeading>john proctor stylist</StyledHeading>
+                    <StyledHeading>{title}</StyledHeading>
                 </GridItem1>
                 <GridItem2>
-                    <StyledImage src="https://images.ctfassets.net/dp3dhjthjc5k/5dsyQNbMaHZiPYooxNXSGY/87bd33296ffda3e511b6e236d8ba8a6f/logoWhite-43911d75e3e207f3b3b2dbfae29fe6fc.svg" />
+                    <StyledImage src={logo.file.url} />
                 </GridItem2>
                 <GridItem3>
-
+                    {/* TODO:: add all the nav menu contents */}
                 </GridItem3>
                 <GridItem4>
-
+                    {/* TODO:: add all the nav menu contents */}
                 </GridItem4>
             </GridContiner>
         </FullScreenNavDiv>
@@ -84,17 +83,17 @@ export const FullScreenMenu = () => {
 }
 
 export const FullScreenNavMenuContext = createContext(false)
-export const FullScreenNavMenuProvider = ({ children }) => {
+export const FullScreenNavMenuProvider = ({ children, pageContext : { navbar } }) => {
     const [open, setOpen] = useState(false)
     const toggleOpen = () => setOpen(!open)
 
     return (
         <FullScreenNavMenuContext.Provider value={{ open, toggleOpen }}>
             <SiteHeadingContainer>
-                <SiteHeading>jonhproctorstylist</SiteHeading>
+                <SiteHeading>{navbar.sideTitle}</SiteHeading>
             </SiteHeadingContainer>
             <FullScreenMenuButton />
-            <FullScreenMenu />
+            <FullScreenMenu {...navbar} />
             {children}
         </FullScreenNavMenuContext.Provider>
     )

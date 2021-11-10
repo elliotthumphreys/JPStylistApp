@@ -7,66 +7,73 @@ exports.createPages = async function ({ actions, graphql }) {
       isPermanent: true,
     })
 
-    const { data } = await graphql(`
-    {
-      allContentfulPageModel {
-        edges {
-          node {
-            slug
-            pageTitle
-            navbar {
-              links {
-                ... on ContentfulLogoModel {
-                  blackLogo {
-                    file {
-                      url
-                    }
-                  }
-                  whiteLogo {
-                    file {
-                      url
-                    }
-                  }
-                }
-                ... on ContentfulSlugModel {
-                  displayName
-                  slug
-                }
-              }
-              displayName
-            }
-            socials {
-              displayName
-              links {
-                displayName
-                link
-              }
-            }
-            textContent {
-              image {
-                title
-                description
-                file {
-                  url
-                  fileName
-                  contentType
-                }
-              }
-              content {
-                raw
-              }
-            }
-          }
-        }
-      }
-    }
-    `)
+    const { data } = await graphql(graphqlQuery);
+
     data.allContentfulPageModel.edges.forEach(edge => {
-      const slug = edge.node.slug
       actions.createPage({
-        path: slug,
+        path: edge.node.slug,
         component: require.resolve(`./src/templates/contentful-page-template.js`),
         context: edge.node,
       })
     })
   }
+
+const graphqlQuery = `
+{
+  allContentfulPageModel {
+    edges {
+      node {
+        slug
+        pageTitle
+        socials {
+          displayName
+          links {
+            displayName
+            link
+          }
+        }
+        textContent {
+          image {
+            title
+            description
+            file {
+              url
+              fileName
+              contentType
+            }
+          }
+          content {
+            raw
+          }
+        }
+        categories {
+          category {
+            link {
+              displayName
+              slug
+            }
+            image {
+              file {
+                url
+              }
+            }
+          }
+        }
+        navbar {
+          title
+          sideTitle
+          links {
+            link
+            displayName
+          }
+          logo {
+            file {
+              url
+            }
+          }
+        }
+      }
+    }
+  }
+}
+`;
