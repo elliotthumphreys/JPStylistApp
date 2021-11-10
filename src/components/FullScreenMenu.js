@@ -51,7 +51,6 @@ transform: translate3d(0px, 0px, 0px)
            skew(0deg, 0deg);
 height: 2px;
 `;
-
 export const FullScreenMenuButton = () => {
     const { open, toggleOpen } = useContext(FullScreenNavMenuContext);
     const [ animationAmount, setAnimationAmount ] = useState(open ? 1 : 0)
@@ -90,18 +89,180 @@ const FullScreenNavDiv = styled.div`
     z-index: 100;
     display: block;
     position: absolute;
-    background: grey;
+    background: black;
     transform: translateY(${
             props => props.open ? '0' : '-105vh'
         }) translateX(0px);
     transition: transform 300ms ease 0s;
 `
+const GridContiner = styled.div`
+    position: fixed;
+    left: 0%;
+    top: 0%;
+    right: 0%;
+    bottom: 0%;
+    z-index: 9999;
+    display: -ms-grid;
+    display: grid;
+    width: 100%;
+    height: 100%;
+    grid-auto-columns: 1fr;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+    -ms-grid-columns: 515px 1fr minmax(490px, 546px);
+    grid-template-columns: 515px 1fr minmax(490px, 546px);
+    -ms-grid-rows: auto auto;
+    grid-template-rows: auto auto;
+    -webkit-transform: translate(0px, 0px);
+    -ms-transform: translate(0px, 0px);
+    transform: translate(0px, 0px);
+    overflow: hidden;
+    opacity: ${props => props.showContent ? 1 : 0};
+    transition: opacity 500ms ease 0s;
+
+    @media screen and (max-width: 991px){
+        grid-auto-rows: auto;
+        -ms-grid-columns: 1fr;
+        grid-template-columns: 1fr;
+        -ms-grid-rows: auto minmax(auto, 33vh) auto;
+        grid-template-rows: auto minmax(auto, 33vh) auto;
+        text-align: center;
+    }
+`
+const GridItem1 = styled.div`
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    border-right: 1px solid #333;
+    border-bottom: 1px solid #333;
+    -ms-grid-row: span 1;
+    grid-row-start: span 1;
+    -ms-grid-row-span: 1;
+    grid-row-end: span 1;
+    -ms-grid-column: span 2;
+    grid-column-start: span 2;
+    -ms-grid-column-span: 2;
+    grid-column-end: span 2;
+
+    @media screen and (max-width: 991px){
+        border-right: none;
+    }
+`
+const GridItem2 = styled.div`
+    overflow: hidden;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid #333;
+
+    @media screen and (max-width: 991px){
+        display: none;
+        padding-top: 15px;
+        padding-bottom: 15px;
+        border-right: none;
+    }
+`
+const GridItem3 = styled.div`
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    overflow: hidden;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    border-right: 1px solid #333;
+    text-align: center;
+
+    @media screen and (max-width: 991px) {
+        -ms-grid-column-span: 2;
+        grid-column-end: 3;
+        -ms-grid-column: 1;
+        grid-column-start: 1;
+        -ms-grid-row-span: 1;
+        grid-row-end: 4;
+        -ms-grid-row: 3;
+        grid-row-start: 3;
+        border-right: none;
+    }
+`
+const GridItem4 = styled.div`
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-pack: start;
+    -webkit-justify-content: flex-start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+    -ms-grid-row: span 1;
+    grid-row-start: span 1;
+    -ms-grid-row-span: 1;
+    grid-row-end: span 1;
+    -ms-grid-column: span 2;
+    grid-column-start: span 2;
+    -ms-grid-column-span: 2;
+    grid-column-end: span 2;
+
+    @media screen and (max-width: 991px){
+        padding-top: 20px;
+        padding-bottom: 15px;
+        border-bottom: 1px solid #333;
+        border-right-style: none;
+        border-right: none;
+    }
+`
 export const FullScreenMenu = () => {
     const { open } = useContext(FullScreenNavMenuContext);
-    
+    const [ showContent, setShowContent ] = useState(open);
+
+    useEffect(() => {
+        let animation = setTimeout(() => {
+            if(open !== showContent)
+                setShowContent(open);
+        }, 300);
+
+        return () => clearTimeout(animation);
+    }, [open])
+
     return (
         <FullScreenNavDiv open={open}>
             {/* TODO:: add all the nav menu contents */}
+            <GridContiner showContent={showContent}>
+                <GridItem1>
+
+                </GridItem1>
+                <GridItem2>
+
+                </GridItem2>
+                <GridItem3>
+
+                </GridItem3>
+                <GridItem4>
+
+                </GridItem4>
+            </GridContiner>
         </FullScreenNavDiv>
     )
 }
