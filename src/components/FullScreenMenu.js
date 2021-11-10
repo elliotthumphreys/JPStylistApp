@@ -1,66 +1,114 @@
-import * as React from 'react'
-import styled from 'styled-components'
-import NavMenuList from "../components/NavMenuList"
-import { DesktopOnly, MobileOrTabletOnly } from "../components/MediaQueryWrapper"
+import React, { useContext, useState, createContext, useEffect } from 'react';
+import styled from 'styled-components';
 
-// styles
-const StyledFullScreenMenuContainer = styled.div`
-    position: absolute;
+const PositioningContainer = styled.div`
     top: 0;
     right: 0;
-    width: Calc(100vw - 58px);
-    height: 100vh;
-    background-color: rgba(0,0,0,0.8);
-    z-index: 100;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-`
-const StyledFullScreenMenuDesktopContainer = styled.div`
     position: absolute;
-    top: 0;
-    right: 0;
-    height: 100vh;
-    background-color: rgba(0,0,0,0.8);
-    z-index: 100;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: Calc(100vw - 358px);
+    display: block;
+    padding: 18px;
+    z-index: 101;
 `
+const StyledButtonContainer = styled.button`
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-align: end;
+    -webkit-align-items: flex-end;
+    -ms-flex-align: end;
+    align-items: flex-end;
+    cursor: pointer;
+    background-color: rgba(0,0,0,0);
+    border: none;
+`
+const StyledButtonContainerChildOne = styled.div`
+width: 44px;
+height: 2px;
+margin-top: 7px;
+margin-bottom: 7px;
+background-color: #fff;
+transform: translate3d(0px, ${props => props.translateY}, 0px)
+           scale3d(1, 1, 1)
+           rotateX(0deg)
+           rotateY(0deg)
+           rotateZ(${props => props.rotateZ})
+           skew(0deg, 0deg);
+transform-style: preserve-3d;
+`;
+const StyledButtonContainerChildTwo = styled(StyledButtonContainerChildOne)`
+width: ${props => props.width};
+transform: translate3d(0px, 0px, 0px)
+           scale3d(1, 1, 1)
+           rotateX(0deg)
+           rotateY(0deg)
+           rotateZ(${props => props.rotateZ})
+           skew(0deg, 0deg);
+height: 2px;
+`;
 
-// markup
-const FullScreenMenu = () => {
-    const { open } = React.useContext(FullScreenNavMenuContext);
+export const FullScreenMenuButton = () => {
+    const { open, toggleOpen } = useContext(FullScreenNavMenuContext);
+    const [ animationAmount, setAnimationAmount ] = useState(open ? 1 : 0)
+    const [ target, setTarget ] = useState(open ? 1 : 0)
 
-    if (!open) {
-        return null
-    }
+    const handleButtonOnClick = () => toggleOpen()
+
+    useEffect(() => {
+        let animation = setTimeout(() => {
+            if(animationAmount < target && target === 1)
+                setAnimationAmount(animationAmount + .075 > target ? target : animationAmount + .075)
+            if(animationAmount > target && target === 0)
+                setAnimationAmount(animationAmount - .075 < target ? target : animationAmount - .075)
+        }, 3);
+
+        return () => clearTimeout(animation);
+    }, [target, animationAmount])
+
+    useEffect(() => {
+        setTarget(open ? 1 : 0)
+    }, [open])
 
     return (
-        <>
-            <MobileOrTabletOnly>
-                <StyledFullScreenMenuContainer>
-                    <NavMenuList useLightLogo={true} />
-                </StyledFullScreenMenuContainer>
-            </MobileOrTabletOnly>
-            <DesktopOnly>
-                <StyledFullScreenMenuDesktopContainer>
-                    <NavMenuList useLightLogo={true} />
-                </StyledFullScreenMenuDesktopContainer>
-            </DesktopOnly>
-        </>
+        <PositioningContainer>
+            <StyledButtonContainer onClick={handleButtonOnClick}>
+                    <StyledButtonContainerChildOne rotateZ={`${0 + (45 * animationAmount)}deg`} translateY={`${0 + (16 * animationAmount)}px`}/>
+                    <StyledButtonContainerChildTwo width={`${56 + (44 * animationAmount)}%`} rotateZ={`-${0 + (45 * animationAmount)}deg`}/>
+            </StyledButtonContainer>
+        </PositioningContainer>
     )
 }
 
-export default FullScreenMenu
+const FullScreenNavDiv = styled.div`
+    width: 100vw;
+    height: 100vh;
+    z-index: 100;
+    display: block;
+    position: absolute;
+    background: grey;
+    transform: translateY(${
+            props => props.open ? '0' : '-105vh'
+        }) translateX(0px);
+    transition: transform 300ms ease 0s;
+`
+export const FullScreenMenu = () => {
+    const { open } = useContext(FullScreenNavMenuContext);
+    
+    return (
+        <FullScreenNavDiv open={open}>
+            {/* TODO:: add all the nav menu contents */}
+        </FullScreenNavDiv>
+    )
+}
 
-export const FullScreenNavMenuContext = React.createContext(false)
-
+export const FullScreenNavMenuContext = createContext(false)
 export const FullScreenNavMenuProvider = ({ children }) => {
-    const [open, setOpen] = React.useState(false)
+    const [open, setOpen] = useState(false)
     const toggleOpen = () => setOpen(!open)
 
     return (

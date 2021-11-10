@@ -6,6 +6,7 @@ import NavMenuList from "../components/NavMenuList"
 // import LandingPageSlideShow from "../components/LandingPageSlideShow"
 import { DesktopOnly, MobileOrTabletOnly } from "../components/MediaQueryWrapper"
 import TextModelComponent from "../components/TextModelComponent"
+import { FullScreenMenuButton, FullScreenNavMenuProvider } from "../components/FullScreenMenu"
 
 const pageStyles = {
   color: "#232129",
@@ -49,35 +50,38 @@ const ContentfulPageTemplate = ({ pageContext }) => {
   } = pageContext;
 
   return (
-    <main style={pageStyles}>
-      <title>{pageTitle}</title>
-      <div style={ContainerStyles}>
-        {/* On desktop nav bar will be visible, and mobile and tablet this will be hidden */}
-        <DesktopOnly>
-          <div style={NavBarStyles}>
-            <NavMenuList links={links}/>
-          </div>
-        </DesktopOnly>
+    <FullScreenNavMenuProvider>
+      <main style={pageStyles}>
+        <title>{pageTitle}</title>
+        <div style={ContainerStyles}>
+          <FullScreenMenuButton />
+          {/* On desktop nav bar will be visible, and mobile and tablet this will be hidden */}
+          <DesktopOnly>
+            <div style={NavBarStyles}>
+              <NavMenuList links={links} />
+            </div>
+          </DesktopOnly>
 
-        { textContent !== null ? <TextModelComponent rawContentfulContent={textContent.content} image={textContent.image}/> : undefined }
+          {textContent !== null ? <TextModelComponent rawContentfulContent={textContent.content} image={textContent.image} /> : undefined}
 
-        {/* This will have a button to open a full screen nav menu */}
-        {/* <SocialBanner /> */}
+          {/* This will have a button to open a full screen nav menu */}
+          {/* <SocialBanner /> */}
 
-        {/* On desktop this will be a standalone image*/}
-        {/* <DesktopOnly>
+          {/* On desktop this will be a standalone image*/}
+          {/* <DesktopOnly>
           <div style={FocalImageStyles} ref={imageContainerRef}>
             <LandscapeBackground parentRef={imageContainerRef} />
             <PortraitBackground parentRef={imageContainerRef} />
           </div>
         </DesktopOnly> */}
 
-        {/* Slideshow only shown on mobile and tablet devices */}
-        {/* <MobileOrTabletOnly>
+          {/* Slideshow only shown on mobile and tablet devices */}
+          {/* <MobileOrTabletOnly>
           <LandingPageSlideShow />
         </MobileOrTabletOnly> */}
-      </div>
-    </main>
+        </div>
+      </main>
+    </FullScreenNavMenuProvider>
   )
 }
 
