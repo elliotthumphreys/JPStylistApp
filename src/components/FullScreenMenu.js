@@ -233,6 +233,16 @@ const GridItem4 = styled.div`
         border-right: none;
     }
 `
+const StyledP = styled.p`
+    color: white;
+    margin: 0px;
+    margin-right: 10%;
+    margin-left: 5%;
+    font-size: min(111px, 7.7vw);
+    line-height: 95%;
+    font-weight: 700;
+    text-transform: uppercase;
+`
 export const FullScreenMenu = () => {
     const { open } = useContext(FullScreenNavMenuContext);
     const [ showContent, setShowContent ] = useState(open);
@@ -251,7 +261,7 @@ export const FullScreenMenu = () => {
             {/* TODO:: add all the nav menu contents */}
             <GridContiner showContent={showContent}>
                 <GridItem1>
-
+                    <StyledP>Example title with august font</StyledP>
                 </GridItem1>
                 <GridItem2>
 
@@ -274,6 +284,7 @@ export const FullScreenNavMenuProvider = ({ children }) => {
 
     return (
         <FullScreenNavMenuContext.Provider value={{ open, toggleOpen }}>
+            <FullScreenMenuButton />
             <FullScreenMenu />
             {children}
         </FullScreenNavMenuContext.Provider>

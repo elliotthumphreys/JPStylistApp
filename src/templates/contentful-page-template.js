@@ -1,6 +1,5 @@
 import * as React from "react"
 import TextModelComponent from "../components/TextModelComponent"
-import { FullScreenMenuButton, FullScreenNavMenuProvider } from "../components/FullScreenMenu"
 
 const pageStyles = {
   color: "#232129",
@@ -26,20 +25,15 @@ const ContentfulPageTemplate = ({ pageContext }) => {
   } = pageContext;
 
   return (
-    <FullScreenNavMenuProvider>
       <main style={pageStyles}>
         <title>{pageTitle}</title>
         <div style={ContainerStyles}>
-          
-          <FullScreenMenuButton />
-
           { textContent !== null ?
             <TextModelComponent rawContentfulContent={textContent.content} image={textContent.image} /> 
             : undefined }
         
         </div>
       </main>
-    </FullScreenNavMenuProvider>
   )
 }
 
