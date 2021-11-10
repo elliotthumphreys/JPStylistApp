@@ -305,6 +305,25 @@ export const FullScreenMenu = () => {
     )
 }
 
+const SiteHeadingContainer = styled.div`
+    left: 0;
+    top: 0; 
+    position: absolute;
+`
+const SiteHeading = styled.h1`
+    font-weight: 700;
+    font-size: 1.5em;
+    font-family: 'Cabin', sans-serif;
+    text-transform: lowercase;
+    transform: rotateZ(90deg);
+    -webkit-transform: rotateZ(90deg);
+    color: white;
+    position: absolute;
+    transform-style: preserve-3d;   
+    top: 4.25em;
+    left: -2.75em;
+    letter-spacing: 1.5px;
+`
 export const FullScreenNavMenuContext = createContext(false)
 export const FullScreenNavMenuProvider = ({ children }) => {
     const [open, setOpen] = useState(false)
@@ -312,6 +331,9 @@ export const FullScreenNavMenuProvider = ({ children }) => {
 
     return (
         <FullScreenNavMenuContext.Provider value={{ open, toggleOpen }}>
+            <SiteHeadingContainer>
+                <SiteHeading>jonhproctorstylist</SiteHeading>
+            </SiteHeadingContainer>
             <FullScreenMenuButton />
             <FullScreenMenu />
             {children}

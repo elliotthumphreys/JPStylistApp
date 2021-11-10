@@ -9,3 +9,9 @@
     font-weight: 400;
     src: url('602d0d5a31ff505b6c2f05b7augustlight.ttf') format('truetype');
 }
+
+@font-face {
+    font-family: 'Cabin';
+    font-weight: 700;
+    src: url('CabinBold.ttf') format('truetype');
+}
