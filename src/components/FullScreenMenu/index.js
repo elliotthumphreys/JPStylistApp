@@ -23,7 +23,6 @@ import {
     StyledCategoryHeading
 } from './StyledComponents'
 import '../../fonts/fonts.css'
-import styled from 'styled-components';
 
 export const FullScreenMenuButton = () => {
     const { open, toggleOpen } = useContext(FullScreenNavMenuContext);
