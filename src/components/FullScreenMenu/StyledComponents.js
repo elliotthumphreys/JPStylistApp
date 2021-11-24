@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from "gatsby"
 import '../../fonts/fonts.css'
 
 export const PositioningContainer = styled.div`
@@ -51,7 +52,6 @@ export const StyledButtonContainerChildTwo = styled(StyledButtonContainerChildOn
             skew(0deg, 0deg);
     height: 2px;
 `;
-
 export const FullScreenNavDiv = styled.div`
     width: 100vw;
     height: 100vh;
@@ -80,8 +80,8 @@ export const GridContiner = styled.div`
     grid-row-gap: 0px;
     -ms-grid-columns: 515px 1fr minmax(490px, 546px);
     grid-template-columns: 515px 1fr minmax(490px, 546px);
-    -ms-grid-rows: auto auto;
-    grid-template-rows: auto auto;
+    -ms-grid-rows: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
     -webkit-transform: translate(0px, 0px);
     -ms-transform: translate(0px, 0px);
     transform: translate(0px, 0px);
@@ -151,6 +151,8 @@ export const GridItem3 = styled.div`
     display: -webkit-flex;
     display: -ms-flexbox;
     display: flex;
+    flex-direction: column;
+    gap: 10px;
     overflow: hidden;
     -webkit-box-pack: center;
     -webkit-justify-content: center;
@@ -197,11 +199,14 @@ export const GridItem4 = styled.div`
 
     @media screen and (max-width: 991px){
         padding-top: 20px;
-        padding-bottom: 15px;
+        padding-bottom: 20px;
         border-bottom: 1px solid #333;
         border-right-style: none;
         border-right: none;
     }
+
+    padding-top: 30px;
+    padding-bottom: 30px;
 `
 export const StyledHeading = styled.h2`
     color: white;
@@ -239,7 +244,17 @@ export const StyledImage = styled.img`
     margin: auto;
     display: block;
 `
-
+export const StyledSocialLink = styled.a`
+    color: white;
+    margin: 0px;
+    margin-right: 10%;
+    margin-left: 5%;
+    font-weight: 700;
+    font-size: 28px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-family: 'August', sans-serif;
+`
 export const SiteHeadingContainer = styled.div`
     left: 0;
     top: 0; 
@@ -258,4 +273,72 @@ export const SiteHeading = styled.h1`
     color: white;
     position: fixed;
     transform-style: preserve-3d;
+`
+export const CategoryImage = styled.img`
+    margin: auto;
+    height: 100%;
+`
+export const CategoryImageContainer = styled(Link)`
+    height: 100%;
+    margin-left: 30px;
+    -webkit-box-flex: 0;
+    -webkit-flex: 0 0 auto;
+    -ms-flex: 0 0 auto;
+    flex: 0 0 auto;
+    -webkit-transition: opacity 200ms ease;
+    transition: opacity 200ms ease;
+    position: relative;
+
+    &:last-of-type {
+        padding-right: 30px;
+    }
+
+    &:hover{
+        opacity: 0.6;
+    }
+
+    @media screen and (max-width: 991px){
+        margin-left: 20px;
+        &:last-of-type {
+            padding-right: 20px;
+        }
+    }
+`
+export const CategoryListContainer = styled.div`
+    display: flex;
+    height: 100%;
+`
+export const ScrollContent = styled.div`
+    height: 100%;
+    position: relative;
+    overflow-x: scroll;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+
+    &::-webkit-scrollbar { /* WebKit */
+        width: 0;
+        height: 0;
+    }
+`
+
+export const StyledCategoryHeadingContainer = styled.div`
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+`
+export const StyledCategoryHeading = styled.p`
+    color: white;
+    padding: 0;
+    font-weight: 700;
+    font-size: 28px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-family: 'August', sans-serif;
+    background: black;
+    width: 100%;
+    text-align: center;
+    opacity: 0.7;
 `

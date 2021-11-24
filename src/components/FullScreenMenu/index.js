@@ -1,4 +1,4 @@
-import React, { useContext, useState, createContext, useEffect } from 'react';
+import React, { useContext, useState, createContext, useEffect, useRef } from 'react';
 import {
     PositioningContainer,
     StyledButtonContainer,
@@ -13,9 +13,17 @@ import {
     StyledHeading,
     StyledImage,
     SiteHeadingContainer,
-    SiteHeading
+    SiteHeading,
+    StyledSocialLink,
+    CategoryImage,
+    CategoryImageContainer,
+    CategoryListContainer,
+    ScrollContent,
+    StyledCategoryHeadingContainer,
+    StyledCategoryHeading
 } from './StyledComponents'
 import '../../fonts/fonts.css'
+import styled from 'styled-components';
 
 export const FullScreenMenuButton = () => {
     const { open, toggleOpen } = useContext(FullScreenNavMenuContext);
@@ -49,9 +57,10 @@ export const FullScreenMenuButton = () => {
     )
 }
 
-export const FullScreenMenu = ({logo, title}) => {
+export const FullScreenMenu = ({ navbar: { logo, title, links }, categories: { category } }) => {
     const { open } = useContext(FullScreenNavMenuContext);
     const [ showContent, setShowContent ] = useState(open);
+    const scrollContentRef = useRef(null)
 
     useEffect(() => {
         let animation = setTimeout(() => {
@@ -61,6 +70,17 @@ export const FullScreenMenu = ({logo, title}) => {
 
         return () => clearTimeout(animation);
     }, [open])
+    
+    useEffect(() => {
+        let wheelEventHandler = event => {
+            event.preventDefault();
+            scrollContentRef.current.scrollLeft += event.deltaY;
+        };
+
+        scrollContentRef.current.addEventListener('wheel', wheelEventHandler);
+
+        return () => scrollContentRef.current?.removeEventListener('wheel', wheelEventHandler);
+    }, [scrollContentRef])
 
     return (
         <FullScreenNavDiv open={open}>
@@ -72,10 +92,24 @@ export const FullScreenMenu = ({logo, title}) => {
                     <StyledImage src={logo.file.url} />
                 </GridItem2>
                 <GridItem3>
-                    {/* TODO:: add all the nav menu contents */}
+                    {links.map(link =>
+                        <StyledSocialLink href={link.link} target="blank">{link.displayName}</StyledSocialLink>
+                    )}
                 </GridItem3>
                 <GridItem4>
-                    {/* TODO:: add all the nav menu contents */}
+                    {/* TODO:: remove duplication of categories */}
+                    <ScrollContent ref={scrollContentRef}>
+                        <CategoryListContainer>
+                            {category.concat(category).concat(category).map(cat =>
+                                <CategoryImageContainer to={cat.link.slug}>
+                                    <StyledCategoryHeadingContainer>
+                                        <StyledCategoryHeading>{cat.link.displayName}</StyledCategoryHeading>
+                                    </StyledCategoryHeadingContainer>
+                                    <CategoryImage src={cat.portraitImage.file.url}/>
+                                </CategoryImageContainer>
+                            )}
+                        </CategoryListContainer>
+                    </ScrollContent>
                 </GridItem4>
             </GridContiner>
         </FullScreenNavDiv>
@@ -83,7 +117,7 @@ export const FullScreenMenu = ({logo, title}) => {
 }
 
 export const FullScreenNavMenuContext = createContext(false)
-export const FullScreenNavMenuProvider = ({ children, pageContext : { navbar } }) => {
+export const FullScreenNavMenuProvider = ({ children, pageContext : { navbar, categories } }) => {
     const [open, setOpen] = useState(false)
     const toggleOpen = () => setOpen(!open)
 
@@ -93,7 +127,7 @@ export const FullScreenNavMenuProvider = ({ children, pageContext : { navbar } }
                 <SiteHeading>{navbar.sideTitle}</SiteHeading>
             </SiteHeadingContainer>
             <FullScreenMenuButton />
-            <FullScreenMenu {...navbar} />
+            <FullScreenMenu navbar={navbar} categories={categories} />
             {children}
         </FullScreenNavMenuContext.Provider>
     )

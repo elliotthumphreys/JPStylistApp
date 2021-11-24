@@ -57,6 +57,11 @@ const graphqlQuery = `
                 url
               }
             }
+            portraitImage {
+              file {
+                url
+              }
+            }
           }
         }
         navbar {
@@ -76,4 +81,5 @@ const graphqlQuery = `
     }
   }
 }
+
 `;
