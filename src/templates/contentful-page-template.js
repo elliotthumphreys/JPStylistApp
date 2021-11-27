@@ -26,16 +26,19 @@ const ContentfulPageTemplate = ({ pageContext }) => {
     categories
   } = pageContext;
 
+  let showTextContent = !!textContent;
+  let showCategories = !textContent && !!categories;
+
   return (
       <main style={pageStyles}>
         <title>{pageTitle}</title>
         <div style={ContainerStyles}>
-          { textContent !== null ?
+          { showTextContent ?
             <TextModelComponent rawContentfulContent={textContent.content} image={textContent.image} /> 
             : undefined }
         
           {
-            categories !== null ?
+            showCategories ?
             <NavigationMenu categories={categories.category} />
             : undefined }
         </div>
