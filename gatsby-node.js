@@ -10,6 +10,13 @@ exports.createPages = async function ({ actions, graphql }) {
     const { data } = await graphql(graphqlQuery);
 
     data.allContentfulPageModel.edges.forEach(edge => {
+
+      actions.createPage({
+        path: '/404',
+        component: require.resolve(`./src/templates/404.js`),
+        context: edge.node,
+      })
+
       actions.createPage({
         path: edge.node.slug,
         component: require.resolve(`./src/templates/contentful-page-template.js`),

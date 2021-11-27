@@ -4,8 +4,8 @@ const { FullScreenNavMenuProvider } = require("./src/components/FullScreenMenu")
 // Wraps every page in a component
 exports.wrapPageElement = ({ element, props }) => {
   return (
-    <FullScreenNavMenuProvider {...props} >
+    !!props?.pageContext?.navbar ? <FullScreenNavMenuProvider {...props} >
       {element}
-    </FullScreenNavMenuProvider>
+    </FullScreenNavMenuProvider> : element 
   )
 }

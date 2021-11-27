@@ -84,6 +84,12 @@ export const CategoryContentsContainer = styled.div`
         opacity: 1;
         background-color: rgba(0,0,0,0.5)
     }
+
+    @media screen and (max-width: 479px) 
+    {
+        opacity: 1;
+        background-color: rgba(0,0,0,0.1)
+    }
 `
 export const StyledCategoryHeading = styled.span`
     color: white;
