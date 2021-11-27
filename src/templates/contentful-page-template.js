@@ -1,12 +1,13 @@
 import * as React from "react"
 import TextModelComponent from "../components/TextModelComponent"
+import NavigationMenu from "../components/NavigationMenu"
 
 const pageStyles = {
   color: "#232129",
   padding: 0,
   fontFamily: "-apple-system, Roboto, sans-serif, serif",
   minHeight: '100vh',
-  backgroundColor: '#1f2022'
+  backgroundColor: 'black'
 }
 const ContainerStyles = {
   position: 'relative',
@@ -21,7 +22,8 @@ const ContentfulPageTemplate = ({ pageContext }) => {
     slug,
     pageTitle,
     navbar: { links },
-    textContent
+    textContent,
+    categories
   } = pageContext;
 
   return (
@@ -32,6 +34,10 @@ const ContentfulPageTemplate = ({ pageContext }) => {
             <TextModelComponent rawContentfulContent={textContent.content} image={textContent.image} /> 
             : undefined }
         
+          {
+            categories !== null ?
+            <NavigationMenu categories={categories.category} />
+            : undefined }
         </div>
       </main>
   )

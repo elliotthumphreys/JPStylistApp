@@ -73,7 +73,7 @@ export const FullScreenMenu = ({ navbar: { logo, title, links }, categories: { c
     useEffect(() => {
         let wheelEventHandler = event => {
             event.preventDefault();
-            scrollContentRef.current.scrollLeft += event.deltaY;
+            scrollContentRef.current.scrollLeft += event.deltaX;
         };
 
         scrollContentRef.current.addEventListener('wheel', wheelEventHandler);
