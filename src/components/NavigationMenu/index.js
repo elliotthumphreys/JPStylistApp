@@ -11,8 +11,8 @@ export const CategoryContainer = styled.div`
     grid-template-areas: 
     ". . ."
     ". . ."; 
-    height: calc(100% - 180px);
-    width: calc(100% - 180px);
+    height: 100%;
+    width: 100%;
     padding: 90px;
     
     overflow: hidden;
@@ -25,8 +25,6 @@ export const CategoryContainer = styled.div`
         ". . "
         ". . "
         ". . "; 
-        height: calc(100% - 120px);
-        width: calc(100% - 120px);
         padding: 60px;
     }
 
@@ -39,8 +37,6 @@ export const CategoryContainer = styled.div`
         ". . "
         ". . "
         ". . "; 
-        height: calc(100% - 120px);
-        width: calc(100% - 120px);
         padding: 60px;
     }
 
@@ -53,8 +49,6 @@ export const CategoryContainer = styled.div`
         ". . "
         ". . "
         ". . "; 
-        height: calc(100% - 120px);
-        width: calc(100% - 120px);
         padding: 60px;
     }
 
@@ -63,8 +57,6 @@ export const CategoryContainer = styled.div`
         display: flex;
         flex-direction: column;
         padding: 0px;
-        width: 100%;
-        height: 100%;
         overflow: scroll;
         padding: 30px 60px;
         padding-top: 60px;
