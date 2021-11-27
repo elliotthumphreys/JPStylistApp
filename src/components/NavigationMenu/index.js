@@ -68,6 +68,7 @@ export const CategoryContainer = styled.div`
         overflow: scroll;
         padding: 30px 60px;
         padding-top: 60px;
+        margin-bottom: 60px;
     }
 `
 export const Category = styled(Link)`

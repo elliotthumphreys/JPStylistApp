@@ -16,6 +16,7 @@ const GlobalStyleComponent = createGlobalStyle`
     -moz-user-drag: none;
     -o-user-drag: none;
     user-drag: none;
+    box-sizing: border-box;
   }
 `;
 
