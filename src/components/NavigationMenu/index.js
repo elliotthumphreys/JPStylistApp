@@ -64,13 +64,10 @@ export const CategoryContainer = styled.div`
     }
 `
 export const Category = styled(Link)`
+    position: relative;
     overflow: hidden;
     background: url(${props => props.url}) center no-repeat;
     background-size: cover;
-    transition: opacity 200ms ease;
-    &:hover{
-        opacity: 0.6;
-    }
 
     @media screen and (max-width: 479px)
     {
@@ -78,12 +75,40 @@ export const Category = styled(Link)`
         min-height: 250px;
     }
 `
+export const CategoryContentsContainer = styled.div`
+    width: 100%;
+    height: 100%;
+    transition: opacity 200ms ease;
+    opacity: 0;
+    &:hover{
+        opacity: 1;
+        background-color: rgba(0,0,0,0.5)
+    }
+`
+export const StyledCategoryHeading = styled.span`
+    color: white;
+    font-weight: 700;
+    font-size: 28px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-family: 'August', sans-serif;
+
+    position: absolute;
+    top: 50%;
+    text-align: center;
+    width: 100%;
+    transform: translateY(-50%);
+
+`
 const NavigationMenu = ({ categories }) => {
 
     return <CategoryContainer>
         {
             categories.concat(categories).concat(categories).map(cat => (
                 <Category url={cat.image.file.url} href={cat.link.slug}>
+                    <CategoryContentsContainer>
+                        <StyledCategoryHeading>{cat.link.displayName}</StyledCategoryHeading>
+                    </CategoryContentsContainer>
                 </Category>
             ))
         }
