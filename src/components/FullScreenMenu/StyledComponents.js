@@ -260,7 +260,7 @@ export const SiteHeadingContainer = styled.div`
     top: 0; 
     position: absolute;
 `
-export const SiteHeading = styled.h1`
+export const SiteHeading = styled(Link)`
     transform: rotateZ(90deg);
     font-weight: 700;
     font-size: 1.5em;   
@@ -274,6 +274,7 @@ export const SiteHeading = styled.h1`
     position: fixed;
     transform-style: preserve-3d;
     z-index: 999;
+    text-decoration: none;
 
     @media screen and (max-width: 479px), screen and (max-width: 767px)
     {

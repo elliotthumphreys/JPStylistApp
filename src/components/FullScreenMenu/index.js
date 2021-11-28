@@ -165,7 +165,7 @@ export const FullScreenNavMenuProvider = ({ children, pageContext: { navbar, cat
     return (
         <FullScreenNavMenuContext.Provider value={{ open, toggleOpen }}>
             <SiteHeadingContainer>
-                <SiteHeading>{navbar.sideTitle}</SiteHeading>
+                <SiteHeading to='/home'>{navbar.sideTitle}</SiteHeading>
             </SiteHeadingContainer>
             <FullScreenMenuButton />
             <FullScreenMenu navbar={navbar} categories={categories} />
