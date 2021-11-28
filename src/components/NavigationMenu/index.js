@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { Link } from "gatsby"
 import styled from 'styled-components';
 
@@ -106,11 +106,38 @@ export const StyledCategoryHeading = styled.span`
 
 `
 const NavigationMenu = ({ categories }) => {
+    const [width, setWidth] = useState(250)
+    const [height, setHeight] = useState(250)
+    const imageContainerRef = useRef(null)
+    const [screenWidth, setScreenWidth] = useState(null) 
+
+    useEffect(() => {
+        let reportWindowSize = event => {
+            setScreenWidth(window.innerWidth);
+        }
+
+        window.addEventListener('resize', reportWindowSize); 
+
+        if(!!imageContainerRef.current
+            && !!imageContainerRef.current.offsetWidth
+            && imageContainerRef.current.offsetWidth * 1.5 > width
+            && !!imageContainerRef.current.offsetHeight
+            && imageContainerRef.current.offsetHeight * 1.5 > height)
+        {
+            setWidth(Math.round(imageContainerRef.current.offsetWidth * 1.5))
+            setHeight(Math.round(imageContainerRef.current.offsetHeight * 1.5))
+        }
+        
+        return () => window.removeEventListener('resize', reportWindowSize); 
+    }, [imageContainerRef, screenWidth])
 
     return <CategoryContainer>
         {
-            categories.concat(categories).concat(categories).map(cat => (
-                <Category url={cat.image.file.url} href={cat.link.slug}>
+            categories.map((cat, index) => (
+                <Category key={cat.link.slug}
+                    ref={index === 0 ? imageContainerRef : undefined}
+                    url={`${cat.image.file.url}?fm=jpg&fl=progressive&w=${width}&h=${height}&fit=fill`}
+                    to={cat.link.slug}>
                     <CategoryContentsContainer>
                         <StyledCategoryHeading>{cat.link.displayName}</StyledCategoryHeading>
                     </CategoryContentsContainer>

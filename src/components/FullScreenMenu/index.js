@@ -68,7 +68,7 @@ export const FullScreenMenu = ({ navbar: { logo, title, links }, categories: { c
         }, 300);
 
         return () => clearTimeout(animation);
-    }, [open])
+    }, [open, showContent])
     
     useEffect(() => {
         let wheelEventHandler = event => {
@@ -92,15 +92,15 @@ export const FullScreenMenu = ({ navbar: { logo, title, links }, categories: { c
                 </GridItem2>
                 <GridItem3>
                     {links.map(link =>
-                        <StyledSocialLink href={link.link}>{link.displayName}</StyledSocialLink>
+                        <StyledSocialLink href={link.link} key={link.link}>{link.displayName}</StyledSocialLink>
                     )}
                 </GridItem3>
                 <GridItem4>
                     {/* TODO:: remove duplication of categories */}
                     <ScrollContent ref={scrollContentRef}>
                         <CategoryListContainer>
-                            {category.concat(category).concat(category).map(cat =>
-                                <CategoryImageContainer to={cat.link.slug}>
+                            {category.map(cat =>
+                                <CategoryImageContainer to={cat.link.slug} key={cat.link.slug}>
                                     <StyledCategoryHeadingContainer>
                                         <StyledCategoryHeading>{cat.link.displayName}</StyledCategoryHeading>
                                     </StyledCategoryHeadingContainer>
