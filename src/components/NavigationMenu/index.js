@@ -25,6 +25,7 @@ export const CategoryContainer = styled.div`
         ". . "
         ". . "; 
         padding: 60px;
+        padding-top: 90px;
     }
 
     @media screen and (max-width: 991px)
@@ -37,6 +38,7 @@ export const CategoryContainer = styled.div`
         ". . "
         ". . "; 
         padding: 60px;
+        padding-top: 90px;
     }
 
     @media screen and (max-width: 767px)
@@ -49,6 +51,7 @@ export const CategoryContainer = styled.div`
         ". . "
         ". . "; 
         padding: 60px;
+        padding-top: 90px;
     }
 
     @media screen and (max-width: 479px) 
@@ -57,8 +60,7 @@ export const CategoryContainer = styled.div`
         flex-direction: column;
         padding: 0px;
         overflow: scroll;
-        padding: 30px 60px;
-        padding-top: 60px;
+        padding: 80px 60px 30px;
         margin-bottom: 60px;
     }
 `
@@ -105,6 +107,7 @@ export const StyledCategoryHeading = styled.span`
     transform: translateY(-50%);
 
 `
+
 const NavigationMenu = memo(({ categories }) => {
     const [width, setWidth] = useState(250)
     const [height, setHeight] = useState(250)
