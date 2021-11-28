@@ -10,8 +10,7 @@ export const CategoryContainer = styled.div`
     gap: 30px 30px; 
     grid-template-areas: 
     ". . ."
-    ". . ."; 
-    height: 100%;
+    ". . .";
     width: 100%;
     padding: 90px;
     
