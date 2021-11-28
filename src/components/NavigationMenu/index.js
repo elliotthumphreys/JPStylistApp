@@ -109,7 +109,7 @@ const NavigationMenu = ({ categories }) => {
     const [width, setWidth] = useState(250)
     const [height, setHeight] = useState(250)
     const imageContainerRef = useRef(null)
-    const [screenWidth, setScreenWidth] = useState(null) 
+    const [screenWidth, setScreenWidth] = useState(window.innerWidth) 
 
     useEffect(() => {
         let reportWindowSize = event => {

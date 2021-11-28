@@ -1,7 +1,8 @@
-import * as React from "react"
+import React, { useContext } from "react"
 import TextModelComponent from "../components/TextModelComponent"
 import NavigationMenu from "../components/NavigationMenu"
 import Gallery from "../components/Gallery"
+import { FullScreenNavMenuContext } from "../components/FullScreenMenu"
 
 const pageStyles = {
   color: "#232129",
@@ -10,6 +11,16 @@ const pageStyles = {
   minHeight: '100vh',
   backgroundColor: 'black'
 }
+
+const pageHiddenStyles = {
+  color: "#232129",
+  padding: 0,
+  fontFamily: "-apple-system, Roboto, sans-serif, serif",
+  height: '100vh',
+  backgroundColor: 'black',
+  overflow: 'hidden'
+}
+
 const ContainerStyles = {
   position: 'relative',
   height: '100%',
@@ -20,6 +31,8 @@ const ContainerStyles = {
 }
 
 const ContentfulPageTemplate = ({ pageContext }) => {
+  const { open } = useContext(FullScreenNavMenuContext);
+
   const {
     slug,
     pageTitle,
@@ -34,7 +47,7 @@ const ContentfulPageTemplate = ({ pageContext }) => {
   let showCategories = !textContent && !gallery && !!categories;
 
   return (
-      <main style={pageStyles}>
+      <main style={open ? pageHiddenStyles : pageStyles}>
         <title>{pageTitle}</title>
         <div style={ContainerStyles}>
           { showTextContent ?
@@ -49,7 +62,7 @@ const ContentfulPageTemplate = ({ pageContext }) => {
             
           {
             showGallery ?
-            <Gallery images={gallery.images} />
+            <Gallery images={gallery.images} title={pageTitle} />
             : undefined }
         </div>
       </main>

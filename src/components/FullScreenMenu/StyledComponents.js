@@ -8,7 +8,7 @@ export const PositioningContainer = styled.div`
     position: absolute;
     display: block;
     padding: 18px;
-    z-index: 10002;
+    z-index: 1002;
 `
 export const StyledButtonContainer = styled.button`
     display: -webkit-box;
@@ -55,7 +55,7 @@ export const StyledButtonContainerChildTwo = styled(StyledButtonContainerChildOn
 export const FullScreenNavDiv = styled.div`
     width: 100vw;
     height: 100vh;
-    z-index: 10000;
+    z-index: 1000;
     display: block;
     position: absolute;
     background: black;
@@ -70,7 +70,7 @@ export const GridContiner = styled.div`
     top: 0%;
     right: 0%;
     bottom: 0%;
-    z-index: 10003;
+    z-index: 1003;
     display: -ms-grid;
     display: grid;
     width: 100%;
@@ -273,7 +273,7 @@ export const SiteHeading = styled.h1`
     color: white;
     position: fixed;
     transform-style: preserve-3d;
-    z-index: 1001;
+    z-index: 999;
 
     @media screen and (max-width: 479px), screen and (max-width: 767px)
     {
