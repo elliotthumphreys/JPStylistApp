@@ -345,8 +345,6 @@ export const StyledCategoryHeading = styled.p`
     letter-spacing: 2px;
     text-transform: uppercase;
     font-family: 'August', sans-serif;
-    background: black;
     width: 100%;
     text-align: center;
-    opacity: 0.7;
 `
