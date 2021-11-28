@@ -84,6 +84,22 @@ const graphqlQuery = `
             }
           }
         }
+        gallery {
+          images {
+            file {
+              url
+              fileName
+              details {
+                image {
+                  height
+                  width
+                }
+              }
+            }
+            description
+            title
+          }
+        }
       }
     }
   }
