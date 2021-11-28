@@ -1,6 +1,7 @@
 import * as React from "react"
 import TextModelComponent from "../components/TextModelComponent"
 import NavigationMenu from "../components/NavigationMenu"
+import Gallery from "../components/Gallery"
 
 const pageStyles = {
   color: "#232129",
@@ -24,11 +25,13 @@ const ContentfulPageTemplate = ({ pageContext }) => {
     pageTitle,
     navbar: { links },
     textContent,
-    categories
+    categories,
+    gallery
   } = pageContext;
 
-  let showTextContent = !!textContent;
-  let showCategories = !textContent && !!categories;
+  let showGallery = !!gallery;
+  let showTextContent = !gallery && !!textContent;
+  let showCategories = !textContent && !gallery && !!categories;
 
   return (
       <main style={pageStyles}>
@@ -41,6 +44,12 @@ const ContentfulPageTemplate = ({ pageContext }) => {
           {
             showCategories ?
             <NavigationMenu categories={categories.category} />
+            : undefined }
+
+            
+          {
+            showGallery ?
+            <Gallery images={gallery.images} />
             : undefined }
         </div>
       </main>

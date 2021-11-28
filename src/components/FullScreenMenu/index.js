@@ -110,7 +110,9 @@ export const FullScreenMenu = ({ navbar: { logo, title, links }, categories: { c
                 </GridItem2>
                 <GridItem3>
                     {links.map(link =>
-                        <StyledSocialLink href={link.link} key={link.link}>{link.displayName}</StyledSocialLink>
+                        <StyledSocialLink
+                            href={link.link}
+                            key={link.link}>{link.displayName}</StyledSocialLink>
                     )}
                 </GridItem3>
                 <GridItem4>
@@ -125,7 +127,8 @@ export const FullScreenMenu = ({ navbar: { logo, title, links }, categories: { c
                                     <StyledCategoryHeadingContainer>
                                         <StyledCategoryHeading>{cat.link.displayName}</StyledCategoryHeading>
                                     </StyledCategoryHeadingContainer>
-                                    <CategoryImage src={cat.portraitImage.file.url}
+                                    <CategoryImage
+                                        src={cat.portraitImage.file.url}
                                         ref={index === 0 ? imageContainerRef : undefined} />
                                 </CategoryImageContainer>
                             )}
