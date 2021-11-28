@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react'
+import React, { useRef, useState, useEffect, memo } from 'react'
 import 'photoswipe/dist/photoswipe.css'
 import 'photoswipe/dist/default-skin/default-skin.css'
 import { SpringGrid, layout, makeResponsive } from 'react-stonecutter';
@@ -33,9 +33,21 @@ const Heading1 = styled.h1`
         padding-right: 15px;
     }
 `
-const MyGallery = ({ images, title }) => {
+
+const usePrevious = (value) => {
+    const ref = useRef();
+    useEffect(() => {
+        ref.current = value;
+    });
+    return ref.current;
+};
+
+const MyGallery = memo(({ images, title }) => {
     const [margin, setMargin] = useState({ x: 60, y: 60 });
+
     const [screenWidth, setScreenWidth] = useState(1920);
+    const prevScreenWidth = usePrevious(screenWidth);
+
     const [numberOfColumns, setSetNumberOfColumns] = useState(5);
 
     const Grid = makeResponsive(SpringGrid, {
@@ -43,7 +55,7 @@ const MyGallery = ({ images, title }) => {
     });
 
     const setNumberOfColumns = event => {
-        if (!window.innerWidth)
+        if (!window.innerWidth )
             return;
 
         let x = { x: 90 }
@@ -57,7 +69,9 @@ const MyGallery = ({ images, title }) => {
             x = { x: 60, xR: 0 };
         }
 
-        setScreenWidth(window.innerWidth - x.x - (x.xR ?? x.x));
+        let newScreenWidth = window.innerWidth - x.x - (x.xR ?? x.x);
+
+        setScreenWidth(newScreenWidth);
         setSetNumberOfColumns(numberOfC);
         setMargin({ ...margin, ...x });
     }
@@ -120,6 +134,6 @@ const MyGallery = ({ images, title }) => {
                 </Grid>
             </Gallery>
         </GalleryContainer>)
-}
+})
 
 export default MyGallery;

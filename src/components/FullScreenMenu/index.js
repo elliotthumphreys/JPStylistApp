@@ -1,4 +1,4 @@
-import React, { useContext, useState, createContext, useEffect, useRef } from 'react';
+import React, { useContext, useState, createContext, useEffect, useRef, memo} from 'react';
 import { useLocation } from "@reach/router";
 import {
     PositioningContainer,
@@ -25,7 +25,7 @@ import {
 } from './StyledComponents'
 import '../../fonts/fonts.css'
 
-export const FullScreenMenuButton = () => {
+export const FullScreenMenuButton = memo(() => {
     const { open, toggleOpen } = useContext(FullScreenNavMenuContext);
     const [animationAmount, setAnimationAmount] = useState(open ? 1 : 0)
     const [target, setTarget] = useState(open ? 1 : 0)
@@ -55,9 +55,9 @@ export const FullScreenMenuButton = () => {
             </StyledButtonContainer>
         </PositioningContainer>
     )
-}
+})
 
-export const FullScreenMenu = ({ navbar: { logo, title, links }, categories: { category } }) => {
+export const FullScreenMenu = memo(({ navbar: { logo, title, links }, categories: { category } }) => {
     const { open } = useContext(FullScreenNavMenuContext);
     const [showContent, setShowContent] = useState(open);
     const scrollContentRef = useRef(null)
@@ -122,7 +122,7 @@ export const FullScreenMenu = ({ navbar: { logo, title, links }, categories: { c
                         <CategoryListContainer>
                             {category.map((cat, index) =>
                                 <CategoryImageContainer
-                                    widthPx={width}
+                                    widthpx={width}
                                     to={cat.link.slug}
                                     key={cat.link.slug}>
                                     <StyledCategoryHeadingContainer>
@@ -139,7 +139,7 @@ export const FullScreenMenu = ({ navbar: { logo, title, links }, categories: { c
             </GridContiner>
         </FullScreenNavDiv>
     )
-}
+})
 
 const usePrevious = (value) => {
     const ref = useRef();
@@ -157,7 +157,7 @@ export const FullScreenNavMenuProvider = ({ children, pageContext: { navbar, cat
     const prevLocation = usePrevious(location);
 
     useEffect(() => {
-        if (location !== prevLocation) {
+        if (location !== prevLocation && open) {
             setOpen(false);
         }
     }, [location, prevLocation, setOpen]);

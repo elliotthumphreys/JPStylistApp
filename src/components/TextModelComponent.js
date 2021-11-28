@@ -1,4 +1,4 @@
-import * as React from "react"
+import React, { memo } from "react"
 import { BLOCKS, MARKS } from "@contentful/rich-text-types"
 import { renderRichText } from "gatsby-source-contentful/rich-text"
 import styled from "styled-components"
@@ -58,7 +58,7 @@ const Heading1 = styled.h1`
 `
 
 
-const TextModelComponent = ({ rawContentfulContent, image }) => {
+const TextModelComponent = memo(({ rawContentfulContent, image }) => {
     const options = {
         renderMark: {
             [MARKS.BOLD]: text => <b>{text}</b>,
@@ -79,6 +79,6 @@ const TextModelComponent = ({ rawContentfulContent, image }) => {
             </StyledTextContentContainer>
         </StyledContentContainer>
     )
-}
+})
 
 export default TextModelComponent;

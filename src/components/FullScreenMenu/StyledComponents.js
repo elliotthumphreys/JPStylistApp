@@ -295,7 +295,7 @@ export const CategoryImageContainer = styled(Link)`
     -webkit-transition: opacity 200ms ease;
     transition: opacity 200ms ease;
     position: relative;
-    width: ${props => props.widthPx}px;
+    width: ${props => props.widthpx}px;
 
     &:last-of-type {
         padding-right: 30px;

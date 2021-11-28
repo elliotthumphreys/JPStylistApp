@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useState, useRef, memo } from 'react'
 import { Link } from "gatsby"
 import styled from 'styled-components';
 
@@ -105,7 +105,7 @@ export const StyledCategoryHeading = styled.span`
     transform: translateY(-50%);
 
 `
-const NavigationMenu = ({ categories }) => {
+const NavigationMenu = memo(({ categories }) => {
     const [width, setWidth] = useState(250)
     const [height, setHeight] = useState(250)
     const imageContainerRef = useRef(null)
@@ -145,6 +145,6 @@ const NavigationMenu = ({ categories }) => {
             ))
         }
     </CategoryContainer>
-}
+})
 
 export default NavigationMenu;
