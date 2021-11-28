@@ -23,8 +23,9 @@ const StyledImg = styled.img`
 const StyledContentContainer = styled.div`
     width: 80%;
     margin: auto;
-    @media screen and (max-width: 479px)
+    @media screen and (max-width: 479px), screen and (max-width: 767px)
     {
+        margin: 0px;
         width: 100%;
         padding-top: 60px;
         padding-left: 45px;
