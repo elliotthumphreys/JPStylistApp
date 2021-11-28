@@ -92,7 +92,7 @@ export const FullScreenMenu = ({ navbar: { logo, title, links }, categories: { c
                 </GridItem2>
                 <GridItem3>
                     {links.map(link =>
-                        <StyledSocialLink href={link.link} target="blank">{link.displayName}</StyledSocialLink>
+                        <StyledSocialLink href={link.link}>{link.displayName}</StyledSocialLink>
                     )}
                 </GridItem3>
                 <GridItem4>
