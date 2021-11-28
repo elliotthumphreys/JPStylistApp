@@ -34,19 +34,10 @@ const Heading1 = styled.h1`
     }
 `
 
-const usePrevious = (value) => {
-    const ref = useRef();
-    useEffect(() => {
-        ref.current = value;
-    });
-    return ref.current;
-};
-
 const MyGallery = memo(({ images, title }) => {
     const [margin, setMargin] = useState({ x: 60, y: 60 });
 
     const [screenWidth, setScreenWidth] = useState(1920);
-    const prevScreenWidth = usePrevious(screenWidth);
 
     const [numberOfColumns, setSetNumberOfColumns] = useState(5);
 

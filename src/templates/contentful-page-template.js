@@ -47,7 +47,7 @@ const ContentfulPageTemplate = ({ pageContext }) => {
   let showCategories = !textContent && !gallery && !!categories;
 
   return (
-      <main style={open ? pageStyles : pageStyles}>
+      <main style={open ? pageHiddenStyles : pageStyles}>
         <title>{pageTitle}</title>
         <div style={ContainerStyles}>
           { showTextContent ?

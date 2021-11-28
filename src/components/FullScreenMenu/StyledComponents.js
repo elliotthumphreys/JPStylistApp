@@ -252,6 +252,7 @@ export const StyledSocialLink = styled.a`
     font-weight: 700;
     font-size: 28px;
     letter-spacing: 2px;
+    text-decoration: none;
     text-transform: uppercase;
     font-family: 'August', sans-serif;
 `
