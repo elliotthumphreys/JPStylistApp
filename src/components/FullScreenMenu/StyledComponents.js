@@ -298,7 +298,8 @@ export const CategoryImageContainer = styled(Link)`
     position: relative;
     width: ${props => props.widthpx}px;
     overflow: hidden;
-
+    display: block;
+    
     &:last-of-type {
         padding-right: 30px;
     }
