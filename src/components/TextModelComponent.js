@@ -9,6 +9,7 @@ const StyledImg = styled.img`
     float: left;
     padding: 20px;
     width: 50%;
+    
     @media screen and (max-width: 767px)
     {
         width: 100%;
@@ -23,6 +24,7 @@ const StyledImg = styled.img`
 const StyledContentContainer = styled.div`
     width: 80%;
     margin: auto;
+
     @media screen and (max-width: 479px), screen and (max-width: 767px)
     {
         margin: 0px;
