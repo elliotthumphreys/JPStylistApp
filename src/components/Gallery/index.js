@@ -35,7 +35,7 @@ const Heading1 = styled.h1`
 `
 const MyGallery = ({ images, title }) => {
     const [margin, setMargin] = useState({ x: 60, y: 60 });
-    const [screenWidth, setScreenWidth] = useState(window.innerWidth - 120);
+    const [screenWidth, setScreenWidth] = useState(1920);
     const [numberOfColumns, setSetNumberOfColumns] = useState(5);
 
     const Grid = makeResponsive(SpringGrid, {
@@ -70,7 +70,7 @@ const MyGallery = ({ images, title }) => {
         return () => window.removeEventListener('resize', setNumberOfColumns);
     }, [])
 
-    let maxImageWidth = window.innerWidth;
+    let maxImageWidth = screenWidth * 1.2;
     let gutterSize = 5;
     let columnWidth = (screenWidth / numberOfColumns) - (gutterSize);
 
