@@ -26,16 +26,16 @@ import '../../fonts/fonts.css'
 
 export const FullScreenMenuButton = () => {
     const { open, toggleOpen } = useContext(FullScreenNavMenuContext);
-    const [ animationAmount, setAnimationAmount ] = useState(open ? 1 : 0)
-    const [ target, setTarget ] = useState(open ? 1 : 0)
+    const [animationAmount, setAnimationAmount] = useState(open ? 1 : 0)
+    const [target, setTarget] = useState(open ? 1 : 0)
 
     const handleButtonOnClick = () => toggleOpen()
 
     useEffect(() => {
         let animation = setTimeout(() => {
-            if(animationAmount < target && target === 1)
+            if (animationAmount < target && target === 1)
                 setAnimationAmount(animationAmount + .075 > target ? target : animationAmount + .075)
-            if(animationAmount > target && target === 0)
+            if (animationAmount > target && target === 0)
                 setAnimationAmount(animationAmount - .075 < target ? target : animationAmount - .075)
         }, 3);
 
@@ -49,8 +49,8 @@ export const FullScreenMenuButton = () => {
     return (
         <PositioningContainer>
             <StyledButtonContainer onClick={handleButtonOnClick}>
-                    <StyledButtonContainerChildOne rotateZ={`${0 + (45 * animationAmount)}deg`} translateY={`${0 + (16 * animationAmount)}px`}/>
-                    <StyledButtonContainerChildTwo width={`${56 + (44 * animationAmount)}%`} rotateZ={`-${0 + (45 * animationAmount)}deg`}/>
+                <StyledButtonContainerChildOne rotateZ={`${0 + (45 * animationAmount)}deg`} translateY={`${0 + (16 * animationAmount)}px`} />
+                <StyledButtonContainerChildTwo width={`${56 + (44 * animationAmount)}%`} rotateZ={`-${0 + (45 * animationAmount)}deg`} />
             </StyledButtonContainer>
         </PositioningContainer>
     )
@@ -58,18 +58,21 @@ export const FullScreenMenuButton = () => {
 
 export const FullScreenMenu = ({ navbar: { logo, title, links }, categories: { category } }) => {
     const { open } = useContext(FullScreenNavMenuContext);
-    const [ showContent, setShowContent ] = useState(open);
+    const [showContent, setShowContent] = useState(open);
     const scrollContentRef = useRef(null)
+    const imageContainerRef = useRef(null)
+    const [width, setWidth] = useState(250)
+    const [screenWidth, setScreenWidth] = useState(null)
 
     useEffect(() => {
         let animation = setTimeout(() => {
-            if(open !== showContent)
+            if (open !== showContent)
                 setShowContent(open);
         }, 300);
 
         return () => clearTimeout(animation);
     }, [open, showContent])
-    
+
     useEffect(() => {
         let wheelEventHandler = event => {
             event.preventDefault();
@@ -80,6 +83,21 @@ export const FullScreenMenu = ({ navbar: { logo, title, links }, categories: { c
 
         return () => scrollContentRef.current?.removeEventListener('wheel', wheelEventHandler);
     }, [scrollContentRef])
+
+    useEffect(() => {
+        let reportWindowSize = event => {
+            setScreenWidth(window.innerWidth);
+        }
+
+        window.addEventListener('resize', reportWindowSize);
+
+        if (!!imageContainerRef.current
+            && !!imageContainerRef.current.offsetWidth) {
+            setWidth(Math.round(imageContainerRef.current.offsetWidth))
+        }
+
+        return () => window.removeEventListener('resize', reportWindowSize);
+    }, [imageContainerRef, screenWidth])
 
     return (
         <FullScreenNavDiv open={open}>
@@ -99,12 +117,16 @@ export const FullScreenMenu = ({ navbar: { logo, title, links }, categories: { c
                     {/* TODO:: remove duplication of categories */}
                     <ScrollContent ref={scrollContentRef}>
                         <CategoryListContainer>
-                            {category.map(cat =>
-                                <CategoryImageContainer to={cat.link.slug} key={cat.link.slug}>
+                            {category.map((cat, index) =>
+                                <CategoryImageContainer
+                                    widthPx={width}
+                                    to={cat.link.slug}
+                                    key={cat.link.slug}>
                                     <StyledCategoryHeadingContainer>
                                         <StyledCategoryHeading>{cat.link.displayName}</StyledCategoryHeading>
                                     </StyledCategoryHeadingContainer>
-                                    <CategoryImage src={cat.portraitImage.file.url}/>
+                                    <CategoryImage src={cat.portraitImage.file.url}
+                                        ref={index === 0 ? imageContainerRef : undefined} />
                                 </CategoryImageContainer>
                             )}
                         </CategoryListContainer>
@@ -116,7 +138,7 @@ export const FullScreenMenu = ({ navbar: { logo, title, links }, categories: { c
 }
 
 export const FullScreenNavMenuContext = createContext(false)
-export const FullScreenNavMenuProvider = ({ children, pageContext : { navbar, categories } }) => {
+export const FullScreenNavMenuProvider = ({ children, pageContext: { navbar, categories } }) => {
     const [open, setOpen] = useState(false)
     const toggleOpen = () => setOpen(!open)
 

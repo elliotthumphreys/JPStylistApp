@@ -294,6 +294,7 @@ export const CategoryImageContainer = styled(Link)`
     -webkit-transition: opacity 200ms ease;
     transition: opacity 200ms ease;
     position: relative;
+    width: ${props => props.widthPx}px;
 
     &:last-of-type {
         padding-right: 30px;
@@ -326,7 +327,6 @@ export const ScrollContent = styled.div`
         height: 0;
     }
 `
-
 export const StyledCategoryHeadingContainer = styled.div`
     position: absolute;
     height: 100%;
