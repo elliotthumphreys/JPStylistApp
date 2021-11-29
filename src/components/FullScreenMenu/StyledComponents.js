@@ -300,6 +300,10 @@ export const CategoryImageContainer = styled(Link)`
     overflow: hidden;
     display: block;
     
+    background-image: url(${props => props.src});
+    background-position: center;
+    background-size: cover;
+
     &:last-of-type {
         padding-right: 30px;
     }
@@ -332,21 +336,31 @@ export const ScrollContent = styled.div`
     }
 `
 export const StyledCategoryHeadingContainer = styled.div`
-    position: absolute;
+    /* position: absolute; */
     height: 100%;
     width: 100%;
-    display: flex;
+    /* display: flex;
     justify-content: center;
-    flex-direction: column;
+    flex-direction: column; */
+
+    position: relative
 `
 export const StyledCategoryHeading = styled.p`
     color: white;
-    padding: 0;
+    /* padding: 0; */
     font-weight: 700;
     font-size: 28px;
     letter-spacing: 2px;
     text-transform: uppercase;
     font-family: 'August', sans-serif;
-    width: 100%;
-    text-align: center;
+    /* width: 100%;
+    text-align: center; */
+
+    margin: 0;
+    /* background: yellow; */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%)
 `

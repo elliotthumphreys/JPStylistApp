@@ -159,16 +159,6 @@ const StyledShitImageContainer = styled.div`
     background-color: ${props => props.colour};
     background-size: fit;
 
-    @media screen and (max-width: 991px)
-    {
-
-    }
-
-    @media screen and (max-width: 767px)
-    {
-
-    }
-
     @media screen and (max-width: 479px) 
     {
         background-image: url(${props => props.imageurlMobile});
@@ -177,7 +167,6 @@ const StyledShitImageContainer = styled.div`
     }
 `;
 const LandingPage = memo(({
-    categories,
     portraitImage,
     landscapeImage,
     portraitImageColour,

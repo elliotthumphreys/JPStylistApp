@@ -1,4 +1,4 @@
-import React, { useContext, useState, createContext, useEffect, useRef, memo} from 'react';
+import React, { useContext, useState, createContext, useEffect, useRef, useCallback, memo} from 'react';
 import { useLocation } from "@reach/router";
 import {
     PositioningContainer,
@@ -30,8 +30,6 @@ export const FullScreenMenuButton = memo(() => {
     const [animationAmount, setAnimationAmount] = useState(open ? 1 : 0)
     const [target, setTarget] = useState(open ? 1 : 0)
 
-    const handleButtonOnClick = () => toggleOpen()
-
     useEffect(() => {
         let animation = setTimeout(() => {
             if (animationAmount < target && target === 1)
@@ -49,7 +47,7 @@ export const FullScreenMenuButton = memo(() => {
 
     return (
         <PositioningContainer>
-            <StyledButtonContainer onClick={handleButtonOnClick}>
+            <StyledButtonContainer onClick={toggleOpen}>
                 <StyledButtonContainerChildOne rotateZ={`${0 + (45 * animationAmount)}deg`} translateY={`${0 + (16 * animationAmount)}px`} />
                 <StyledButtonContainerChildTwo width={`${56 + (44 * animationAmount)}%`} rotateZ={`-${0 + (45 * animationAmount)}deg`} />
             </StyledButtonContainer>
@@ -122,15 +120,11 @@ export const FullScreenMenu = memo(({ navbar: { logo, title, links }, categories
                         <CategoryListContainer>
                             {category.map((cat, index) =>
                                 <CategoryImageContainer
+                                    src={cat.portraitImage.file.url}
                                     widthpx={width}
                                     to={cat.link.slug}
                                     key={cat.link.slug}>
-                                    <StyledCategoryHeadingContainer>
                                         <StyledCategoryHeading>{cat.link.displayName}</StyledCategoryHeading>
-                                    </StyledCategoryHeadingContainer>
-                                    <CategoryImage
-                                        src={cat.portraitImage.file.url}
-                                        ref={index === 0 ? imageContainerRef : undefined} />
                                 </CategoryImageContainer>
                             )}
                         </CategoryListContainer>
@@ -149,16 +143,16 @@ const usePrevious = (value) => {
     return ref.current;
 };
 
-export const FullScreenNavMenuContext = createContext(false)
+export const FullScreenNavMenuContext = createContext(true)
 export const FullScreenNavMenuProvider = ({ children, pageContext: { navbar, categories } }) => {
-    const [open, setOpen] = useState(false)
+    const [open, setOpen] = useState(true)
     const toggleOpen = () => setOpen(!open)
     const location = useLocation(); 
     const prevLocation = usePrevious(location);
 
     useEffect(() => {
         if (location !== prevLocation && open) {
-            setOpen(false);
+            setOpen(true);
         }
     }, [location, prevLocation, setOpen]);
 
