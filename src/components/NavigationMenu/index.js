@@ -112,26 +112,25 @@ const NavigationMenu = memo(({ categories }) => {
     const [width, setWidth] = useState(250)
     const [height, setHeight] = useState(250)
     const imageContainerRef = useRef(null)
-    const [screenWidth, setScreenWidth] = useState(1920) 
+    const [screenWidth, setScreenWidth] = useState(1920)
 
     useEffect(() => {
         let reportWindowSize = event => {
             setScreenWidth(window.innerWidth);
         }
 
-        window.addEventListener('resize', reportWindowSize); 
+        window.addEventListener('resize', reportWindowSize);
 
-        if(!!imageContainerRef.current
+        if (!!imageContainerRef.current
             && !!imageContainerRef.current.offsetWidth
             && imageContainerRef.current.offsetWidth * 1.5 > width
             && !!imageContainerRef.current.offsetHeight
-            && imageContainerRef.current.offsetHeight * 1.5 > height)
-        {
+            && imageContainerRef.current.offsetHeight * 1.5 > height) {
             setWidth(Math.round(imageContainerRef.current.offsetWidth * 1.5))
             setHeight(Math.round(imageContainerRef.current.offsetHeight * 1.5))
         }
-        
-        return () => window.removeEventListener('resize', reportWindowSize); 
+
+        return () => window.removeEventListener('resize', reportWindowSize);
     }, [imageContainerRef, screenWidth])
 
     return <CategoryContainer>
@@ -139,7 +138,7 @@ const NavigationMenu = memo(({ categories }) => {
             categories.map((cat, index) => (
                 <Category key={cat.link.slug}
                     ref={index === 0 ? imageContainerRef : undefined}
-                    url={`${cat.image.file.url}?fm=jpg&fl=progressive&w=${width}&h=${height}&fit=fill`}
+                    url={`${cat.image.file.url}?fm=jpg&fl=progressive&w=${width}&h=${height}&fit=fill&f=face`}
                     to={cat.link.slug}>
                     <CategoryContentsContainer>
                         <StyledCategoryHeading>{cat.link.displayName}</StyledCategoryHeading>
@@ -150,4 +149,66 @@ const NavigationMenu = memo(({ categories }) => {
     </CategoryContainer>
 })
 
-export default NavigationMenu;
+const StyledShitImageContainer = styled.div`
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background-image: url(${props => props.imageurl});
+    background-repeat: no-repeat;
+    background-position: ${props => props.position};
+    background-color: ${props => props.colour};
+    background-size: fit;
+
+    @media screen and (max-width: 991px)
+    {
+
+    }
+
+    @media screen and (max-width: 767px)
+    {
+
+    }
+
+    @media screen and (max-width: 479px) 
+    {
+        background-image: url(${props => props.imageurlMobile});
+        background-position: ${props => props.positionMobile};
+        background-color: ${props => props.colourMobile};
+    }
+`;
+const LandingPage = memo(({
+    categories,
+    portraitImage,
+    landscapeImage,
+    portraitImageColour,
+    portraitImagePosition,
+    landscapeImageColour,
+    landscapeImagePosition
+}) => {
+    const [width, setWidth] = useState(0)
+
+    const setSizes = event => {
+        setWidth(Math.round(window.innerWidth * 1.2));
+    }
+
+    useEffect(() => {
+        setSizes();
+
+        window.addEventListener('resize', setSizes);
+
+        return () => window.removeEventListener('resize', setSizes);
+    }, [])
+
+    return <>
+        <StyledShitImageContainer
+            imageurl={`${landscapeImage.file.url}?fm=jpg&fl=progressive&w=${width}`}
+            imageurlMobile={`${portraitImage.file.url}?fm=jpg&fl=progressive&w=${width}`}
+            colour={landscapeImageColour}
+            colourMobile={portraitImageColour}
+            position={landscapeImagePosition}
+            positionMobile={portraitImagePosition}>
+
+        </StyledShitImageContainer>
+    </>
+})
+export default LandingPage;

@@ -100,9 +100,24 @@ const graphqlQuery = `
             title
           }
         }
+        homeContent {
+          portraitImage {
+            file {
+              url
+            }
+          }
+          landscapeImage {
+            file {
+              url
+            }
+          }
+          portraitImageColour
+          portraitImagePosition
+          landscapeImageColour
+          landscapeImagePosition
+        }
       }
     }
   }
 }
-
 `;

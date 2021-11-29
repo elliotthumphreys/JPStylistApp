@@ -39,12 +39,13 @@ const ContentfulPageTemplate = ({ pageContext }) => {
     navbar: { links },
     textContent,
     categories,
-    gallery
+    gallery,
+    homeContent
   } = pageContext;
 
   let showGallery = !!gallery;
-  let showTextContent = !gallery && !!textContent;
-  let showCategories = !textContent && !gallery && !!categories;
+  let showTextContent = !!textContent;
+  let showHomeContent = !!homeContent && !!categories;
 
   return (
       <main style={open ? pageHiddenStyles : pageStyles}>
@@ -55,8 +56,8 @@ const ContentfulPageTemplate = ({ pageContext }) => {
             : undefined }
         
           {
-            showCategories ?
-            <NavigationMenu categories={categories.category} />
+            showHomeContent ?
+            <NavigationMenu categories={categories.category} {...homeContent} />
             : undefined }
 
             
