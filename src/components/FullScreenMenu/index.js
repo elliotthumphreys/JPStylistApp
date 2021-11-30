@@ -59,11 +59,6 @@ export const FullScreenMenuButton = memo(() => {
 export const FullScreenMenu = memo(({ navbar: { logo, title, links }, categories: { category } }) => {
     const { open } = useContext(FullScreenNavMenuContext);
     const [showContent, setShowContent] = useState(open);
-    const scrollContentRef = useRef(null)
-    const containerRef = useRef(null)
-
-    const [containerHeight, setContainerHeight] = useState(0)
-
     var animationCallback = useCallback(() => {
         if (open !== showContent)
             setShowContent(open);
@@ -74,6 +69,7 @@ export const FullScreenMenu = memo(({ navbar: { logo, title, links }, categories
         return () => clearTimeout(animation);
     }, [open, showContent])
 
+    const scrollContentRef = useRef(null);
     var wheelEventHandlerCallback = useCallback(event => {
         event?.preventDefault();
         scrollContentRef.current.scrollLeft += Math.abs(event.deltaX) > Math.abs(event.deltaY) ? event.deltaX : event.deltaY;
@@ -84,6 +80,8 @@ export const FullScreenMenu = memo(({ navbar: { logo, title, links }, categories
         return () => scrollContentRef.current.removeEventListener('wheel', wheelEventHandlerCallback);
     }, [scrollContentRef])
 
+    const containerRef = useRef(null)
+    const [containerHeight, setContainerHeight] = useState(0)
     var setContainerHeightCallback = useCallback(event => {
         event?.preventDefault();
         setContainerHeight(containerRef.current.clientHeight)
@@ -117,12 +115,15 @@ export const FullScreenMenu = memo(({ navbar: { logo, title, links }, categories
                     <ScrollContent ref={scrollContentRef}>
                         <CategoryListContainer ref={containerRef}>
                             {!!containerHeight ? category.map((cat, index) => {
+                                let width = Math.abs((containerHeight / cat.portraitImage.file.details.image.height) * cat.portraitImage.file.details.image.width);
+                                
                                 return <CategoryImageContainer
-                                    to={cat.link.slug}
-                                    key={cat.link.slug}
-                                    width={(containerHeight / cat.portraitImage.file.details.image.height) * cat.portraitImage.file.details.image.width}>
+                                            to={cat.link.slug}
+                                            key={cat.link.slug}
+                                            width={width}>
                                         <CategoryImage 
-                                            src={cat.portraitImage.file.url} />
+                                            src={cat.portraitImage.file.url}
+                                            width={width}/>
                                         <StyledCategoryHeading>{cat.link.displayName}</StyledCategoryHeading>
                                  </CategoryImageContainer>
                             }) : undefined}

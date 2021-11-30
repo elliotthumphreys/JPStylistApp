@@ -290,6 +290,7 @@ export const SiteHeading = styled(Link)`
 `
 export const CategoryImage = styled.img`
     height: 100%;
+    width: ${props => props.width}px;
 `
 export const CategoryImageContainer = styled.div`
     display: block;
