@@ -180,8 +180,7 @@ export const GridItem3 = styled.div`
         -ms-grid-row: 3;
         grid-row-start: 3;
         border-right: none;
-
-        align-items: self-end;
+        align-items: end;
     }
 `
 export const GridItem4 = styled.div`
