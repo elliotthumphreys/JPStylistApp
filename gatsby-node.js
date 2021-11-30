@@ -62,11 +62,23 @@ const graphqlQuery = `
             image {
               file {
                 url
+                details {
+                  image {
+                    height
+                    width
+                  }
+                }
               }
             }
             portraitImage {
               file {
                 url
+                details {
+                  image {
+                    height
+                    width
+                  }
+                }
               }
             }
           }

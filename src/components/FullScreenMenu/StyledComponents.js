@@ -291,18 +291,19 @@ export const SiteHeading = styled(Link)`
 export const CategoryImage = styled.img`
     height: 100%;
 `
-export const CategoryImageContainer = styled(Link)`
+export const CategoryImageContainer = styled.div`
+    display: block;
+    position: relative;
     height: 100%;
     margin-left: 30px;
     -webkit-box-flex: 0;
-    -webkit-flex: 0 0 auto;
+     -webkit-flex: 0 0 auto;
     -ms-flex: 0 0 auto;
     flex: 0 0 auto;
-    -webkit-transition: opacity 200ms ease;
+    -webkit-transition: opacity 200ms ease; 
     transition: opacity 200ms ease;
-    position: relative;
     overflow: hidden;
-    display: block;
+    width: ${props => props.width}px;
 
     &:hover{
         opacity: 0.6;
@@ -349,17 +350,12 @@ export const StyledCategoryHeadingContainer = styled.div`
 `
 export const StyledCategoryHeading = styled.p`
     color: white;
-    /* padding: 0; */
     font-weight: 700;
     font-size: 28px;
     letter-spacing: 2px;
     text-transform: uppercase;
     font-family: 'August', sans-serif;
-    /* width: 100%;
-    text-align: center; */
-
     margin: 0;
-    /* background: yellow; */
     position: absolute;
     top: 50%;
     left: 50%;

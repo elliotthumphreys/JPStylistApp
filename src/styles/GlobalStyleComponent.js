@@ -4,6 +4,7 @@ const GlobalStyleComponent = createGlobalStyle`
   body {
       margin: 0;
       background-color: black;
+      font-display: block;
   }
 
   * {
@@ -18,6 +19,10 @@ const GlobalStyleComponent = createGlobalStyle`
     -o-user-drag: none;
     user-drag: none;
     box-sizing: border-box;
+  }
+
+  *:before, *:after {
+    box-sizing: inherit;
   }
 `;
 

@@ -60,44 +60,41 @@ export const FullScreenMenu = memo(({ navbar: { logo, title, links }, categories
     const { open } = useContext(FullScreenNavMenuContext);
     const [showContent, setShowContent] = useState(open);
     const scrollContentRef = useRef(null)
-    const imageContainerRef = useRef(null)
-    const [width, setWidth] = useState(250)
-    const [screenWidth, setScreenWidth] = useState(null)
+    const containerRef = useRef(null)
 
+    const [containerHeight, setContainerHeight] = useState(0)
+
+    var animationCallback = useCallback(() => {
+        if (open !== showContent)
+            setShowContent(open);
+    }, [open, showContent]);
     useEffect(() => {
-        let animation = setTimeout(() => {
-            if (open !== showContent)
-                setShowContent(open);
-        }, 300);
+        let animation = setTimeout(animationCallback, 300);
 
         return () => clearTimeout(animation);
     }, [open, showContent])
 
+    var wheelEventHandlerCallback = useCallback(event => {
+        event?.preventDefault();
+        scrollContentRef.current.scrollLeft += Math.abs(event.deltaX) > Math.abs(event.deltaY) ? event.deltaX : event.deltaY;
+    }, []);
     useEffect(() => {
-        let wheelEventHandler = event => {
-            event.preventDefault();
-            scrollContentRef.current.scrollLeft += Math.abs(event.deltaX) > Math.abs(event.deltaY) ? event.deltaX : event.deltaY;
-        };
+        scrollContentRef.current.addEventListener('wheel', wheelEventHandlerCallback);
 
-        scrollContentRef.current.addEventListener('wheel', wheelEventHandler);
-
-        return () => scrollContentRef.current?.removeEventListener('wheel', wheelEventHandler);
+        return () => scrollContentRef.current.removeEventListener('wheel', wheelEventHandlerCallback);
     }, [scrollContentRef])
 
+    var setContainerHeightCallback = useCallback(event => {
+        event?.preventDefault();
+        setContainerHeight(containerRef.current.clientHeight)
+    }, []);
     useEffect(() => {
-        let reportWindowSize = event => {
-            setScreenWidth(window.innerWidth);
-        }
+        setContainerHeightCallback();
 
-        window.addEventListener('resize', reportWindowSize);
+        window.addEventListener('resize', setContainerHeightCallback);
 
-        if (!!imageContainerRef.current
-            && !!imageContainerRef.current.offsetWidth) {
-            setWidth(Math.round(imageContainerRef.current.offsetWidth))
-        }
-
-        return () => window.removeEventListener('resize', reportWindowSize);
-    }, [imageContainerRef, screenWidth])
+        return () => window.removeEventListener('resize', setContainerHeightCallback);
+    }, [])
 
     return (
         <FullScreenNavDiv open={open}>
@@ -118,17 +115,17 @@ export const FullScreenMenu = memo(({ navbar: { logo, title, links }, categories
                 <GridItem4>
                     {/* TODO:: remove duplication of categories */}
                     <ScrollContent ref={scrollContentRef}>
-                        <CategoryListContainer>
-                            {category.map((cat, index) =>
-                                <CategoryImageContainer
+                        <CategoryListContainer ref={containerRef}>
+                            {!!containerHeight ? category.map((cat, index) => {
+                                return <CategoryImageContainer
                                     to={cat.link.slug}
-                                    key={cat.link.slug}>
-                                        <CategoryImage src={cat.portraitImage.file.url}>
-
-                                        </CategoryImage>
+                                    key={cat.link.slug}
+                                    width={(containerHeight / cat.portraitImage.file.details.image.height) * cat.portraitImage.file.details.image.width}>
+                                        <CategoryImage 
+                                            src={cat.portraitImage.file.url} />
                                         <StyledCategoryHeading>{cat.link.displayName}</StyledCategoryHeading>
-                                </CategoryImageContainer>
-                            )}
+                                 </CategoryImageContainer>
+                            }) : undefined}
                             <PaddedDiv key='padded-spacer'/>
                         </CategoryListContainer>
                     </ScrollContent>
