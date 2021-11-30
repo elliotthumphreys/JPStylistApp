@@ -21,7 +21,8 @@ import {
     CategoryListContainer,
     ScrollContent,
     StyledCategoryHeadingContainer,
-    StyledCategoryHeading
+    StyledCategoryHeading,
+    PaddedDiv
 } from './StyledComponents'
 import '../../fonts/fonts.css'
 
@@ -128,6 +129,7 @@ export const FullScreenMenu = memo(({ navbar: { logo, title, links }, categories
                                         <StyledCategoryHeading>{cat.link.displayName}</StyledCategoryHeading>
                                 </CategoryImageContainer>
                             )}
+                            <PaddedDiv key='padded-spacer'/>
                         </CategoryListContainer>
                     </ScrollContent>
                 </GridItem4>

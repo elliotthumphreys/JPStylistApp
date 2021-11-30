@@ -60,8 +60,8 @@ export const FullScreenNavDiv = styled.div`
     position: absolute;
     background: black;
     transform: translateY(${
-            props => props.open ? '0' : '-105vh'
-        }) translateX(0px);
+    props => props.open ? '0' : '-105vh'
+    }) translateX(0px);
     transition: transform 300ms ease 0s;
 `
 export const GridContiner = styled.div`
@@ -130,6 +130,11 @@ export const GridItem1 = styled.div`
 
     @media screen and (max-width: 991px){
         border-right: none;
+    }
+
+    @media screen and (max-width: 479px)
+    {
+        align-items: flex-start;
     }
 `
 export const GridItem2 = styled.div`
@@ -237,6 +242,7 @@ export const StyledHeading = styled.h2`
         max-width: 250px;
         font-size: 42px;
         letter-spacing: 1px;
+        padding-right: 50px;
     }
 `
 export const StyledImage = styled.img`
@@ -298,19 +304,21 @@ export const CategoryImageContainer = styled(Link)`
     overflow: hidden;
     display: block;
 
-    &:last-of-type {
-        padding-right: 30px;
-    }
-
     &:hover{
         opacity: 0.6;
     }
 
     @media screen and (max-width: 991px){
         margin-left: 20px;
-        &:last-of-type {
-            padding-right: 20px;
-        }
+    }
+`
+export const PaddedDiv = styled.div`
+    position: relative;
+    height: 100%;
+    padding-right: 30px;
+
+    @media screen and (max-width: 479px){
+        padding-right: 20px;
     }
 `
 export const CategoryListContainer = styled.div`
@@ -337,7 +345,7 @@ export const StyledCategoryHeadingContainer = styled.div`
     justify-content: center;
     flex-direction: column; */
 
-    position: relative
+    position: relative;
 `
 export const StyledCategoryHeading = styled.p`
     color: white;
@@ -356,5 +364,10 @@ export const StyledCategoryHeading = styled.p`
     top: 50%;
     left: 50%;
     margin-right: -50%;
-    transform: translate(-50%, -50%)
+    transform: translate(-50%, -50%);
+
+    @media screen and (max-width: 479px), screen and (max-width: 767px)
+    {
+        font-size: 26px;
+    }
 `
