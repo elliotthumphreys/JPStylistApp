@@ -120,10 +120,11 @@ export const FullScreenMenu = memo(({ navbar: { logo, title, links }, categories
                         <CategoryListContainer>
                             {category.map((cat, index) =>
                                 <CategoryImageContainer
-                                    src={cat.portraitImage.file.url}
-                                    widthpx={width}
                                     to={cat.link.slug}
                                     key={cat.link.slug}>
+                                        <CategoryImage src={cat.portraitImage.file.url}>
+
+                                        </CategoryImage>
                                         <StyledCategoryHeading>{cat.link.displayName}</StyledCategoryHeading>
                                 </CategoryImageContainer>
                             )}

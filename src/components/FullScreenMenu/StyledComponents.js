@@ -283,7 +283,6 @@ export const SiteHeading = styled(Link)`
     }
 `
 export const CategoryImage = styled.img`
-    margin: auto;
     height: 100%;
 `
 export const CategoryImageContainer = styled(Link)`
@@ -296,13 +295,8 @@ export const CategoryImageContainer = styled(Link)`
     -webkit-transition: opacity 200ms ease;
     transition: opacity 200ms ease;
     position: relative;
-    width: ${props => props.widthpx}px;
     overflow: hidden;
     display: block;
-    
-    background-image: url(${props => props.src});
-    background-position: center;
-    background-size: cover;
 
     &:last-of-type {
         padding-right: 30px;
