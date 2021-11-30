@@ -3,6 +3,7 @@ import TextModelComponent from "../components/TextModelComponent"
 import NavigationMenu from "../components/NavigationMenu"
 import Gallery from "../components/Gallery"
 import { FullScreenNavMenuContext } from "../components/FullScreenMenu"
+import { Helmet } from "react-helmet"
 
 const pageStyles = {
   color: "#232129",
@@ -49,7 +50,11 @@ const ContentfulPageTemplate = ({ pageContext }) => {
 
   return (
       <main style={open ? pageHiddenStyles : pageStyles}>
-        <title>{pageTitle}</title>
+        <Helmet>
+          <meta charSet="utf-8" />
+          <meta http-equiv="ScreenOrientation" content="autoRotate:disabled"></meta>
+          <title>{pageTitle}</title>
+        </Helmet>
         <div style={ContainerStyles}>
           { showTextContent ?
             <TextModelComponent rawContentfulContent={textContent.content} image={textContent.image} /> 
@@ -60,7 +65,6 @@ const ContentfulPageTemplate = ({ pageContext }) => {
             <NavigationMenu categories={categories.category} {...homeContent} />
             : undefined }
 
-            
           {
             showGallery ?
             <Gallery images={gallery.images} title={pageTitle} />
