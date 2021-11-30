@@ -145,16 +145,16 @@ const usePrevious = (value) => {
     return ref.current;
 };
 
-export const FullScreenNavMenuContext = createContext(true)
+export const FullScreenNavMenuContext = createContext(false)
 export const FullScreenNavMenuProvider = ({ children, pageContext: { navbar, categories } }) => {
-    const [open, setOpen] = useState(true)
+    const [open, setOpen] = useState(false)
     const toggleOpen = () => setOpen(!open)
     const location = useLocation(); 
     const prevLocation = usePrevious(location);
 
     useEffect(() => {
         if (location !== prevLocation && open) {
-            setOpen(true);
+            setOpen(false);
         }
     }, [location, prevLocation, setOpen]);
 
