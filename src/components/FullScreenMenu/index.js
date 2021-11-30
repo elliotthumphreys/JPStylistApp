@@ -78,9 +78,9 @@ export const FullScreenMenu = memo(({ navbar: { logo, title, links }, categories
         scrollContentRef.current.scrollLeft += Math.abs(event.deltaX) > Math.abs(event.deltaY) ? event.deltaX : event.deltaY;
     }, []);
     useEffect(() => {
-        scrollContentRef.current.addEventListener('wheel', wheelEventHandlerCallback);
+        scrollContentRef.current?.addEventListener('wheel', wheelEventHandlerCallback);
 
-        return () => scrollContentRef.current.removeEventListener('wheel', wheelEventHandlerCallback);
+        return () => scrollContentRef.current?.removeEventListener('wheel', wheelEventHandlerCallback);
     }, [scrollContentRef])
 
     const containerRef = useRef(null)
