@@ -292,7 +292,7 @@ export const CategoryImage = styled.img`
     height: 100%;
     width: ${props => props.width}px;
 `
-export const CategoryImageContainer = styled.div`
+export const CategoryImageContainer = styled(Link)`
     display: block;
     position: relative;
     height: 100%;

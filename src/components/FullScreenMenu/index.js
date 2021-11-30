@@ -111,22 +111,23 @@ export const FullScreenMenu = memo(({ navbar: { logo, title, links }, categories
                     )}
                 </GridItem3>
                 <GridItem4>
-                    {/* TODO:: remove duplication of categories */}
                     <ScrollContent ref={scrollContentRef}>
                         <CategoryListContainer ref={containerRef}>
                             {!!containerHeight ? category.map((cat, index) => {
-                                let width = Math.abs((containerHeight / cat.portraitImage.file.details.image.height) * cat.portraitImage.file.details.image.width);
-                                
+                                let width = Math.round((containerHeight / cat.portraitImage.file.details.image.height) * cat.portraitImage.file.details.image.width);
+                                let height = Math.round(containerHeight);
+
                                 return <CategoryImageContainer
                                             to={cat.link.slug}
                                             key={cat.link.slug}
                                             width={width}>
                                         <CategoryImage 
-                                            src={cat.portraitImage.file.url}
+                                            src={`${cat.portraitImage.file.url}?fm=jpg&fl=progressive&w=${width}&h=${height}&fit=fill&f=face`}
                                             width={width}/>
                                         <StyledCategoryHeading>{cat.link.displayName}</StyledCategoryHeading>
                                  </CategoryImageContainer>
                             }) : undefined}
+
                             <PaddedDiv key='padded-spacer'/>
                         </CategoryListContainer>
                     </ScrollContent>
