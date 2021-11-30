@@ -22,7 +22,10 @@ import {
     ScrollContent,
     StyledCategoryHeadingContainer,
     StyledCategoryHeading,
-    PaddedDiv
+    PaddedDiv,
+    StyledSocialExternalLink,
+    LinkImage,
+    StyledSmallImage
 } from './StyledComponents'
 import '../../fonts/fonts.css'
 
@@ -97,17 +100,23 @@ export const FullScreenMenu = memo(({ navbar: { logo, title, links }, categories
     return (
         <FullScreenNavDiv open={open}>
             <GridContiner showContent={showContent}>
-                <GridItem1>
-                    <StyledHeading>{title}</StyledHeading>
-                </GridItem1>
                 <GridItem2>
                     <StyledImage src={logo.file.url} />
                 </GridItem2>
+                <GridItem1>
+                    <StyledHeading>{title}</StyledHeading>
+                    <StyledSmallImage src={logo.file.url} />
+                </GridItem1>
                 <GridItem3>
-                    {links.map(link =>
-                        <StyledSocialLink
-                            href={link.link}
-                            key={link.link}>{link.displayName}</StyledSocialLink>
+                    {links.map(link => (
+                        link.isExternalLink ? 
+                            <StyledSocialExternalLink
+                                href={link.link}
+                                key={link.link}>{link.displayName}{!!link.icon ? <LinkImage src={link.icon.file.url}/> : undefined}</StyledSocialExternalLink> :
+                            <StyledSocialLink
+                                to={link.link}
+                                key={link.link}>{link.displayName}{!!link.icon ? <LinkImage src={link.icon.file.url} /> : undefined}</StyledSocialLink>
+                    )
                     )}
                 </GridItem3>
                 <GridItem4>

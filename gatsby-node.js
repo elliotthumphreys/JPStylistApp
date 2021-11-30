@@ -86,13 +86,19 @@ const graphqlQuery = `
         navbar {
           title
           sideTitle
-          links {
-            link
-            displayName
-          }
           logo {
             file {
               url
+            }
+          }
+          links {
+            link
+            displayName
+            isExternalLink
+            icon {
+              file {
+                url
+              }
             }
           }
         }
