@@ -402,7 +402,7 @@ export const CategoryImageContainer = styled(Link)`
     display: block;
     position: relative;
     height: 100%;
-    margin-left: 30px;
+    /* margin-left: 30px; */
     -webkit-box-flex: 0;
      -webkit-flex: 0 0 auto;
     -ms-flex: 0 0 auto;
@@ -417,7 +417,7 @@ export const CategoryImageContainer = styled(Link)`
     }
 
     @media screen and (max-width: 991px){
-        margin-left: 20px;
+        /* margin-left: 20px; */
     }
 `
 export const PaddedDiv = styled.div`

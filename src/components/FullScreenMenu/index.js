@@ -137,7 +137,7 @@ export const FullScreenMenu = memo(({ navbar: { logo, title, links }, categories
                                  </CategoryImageContainer>
                             }) : undefined}
 
-                            <PaddedDiv key='padded-spacer'/>
+                            {/* <PaddedDiv key='padded-spacer'/> */}
                         </CategoryListContainer>
                     </ScrollContent>
                 </GridItem4>
