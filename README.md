@@ -49,3 +49,7 @@ Deployment for this project is handled by  [AWS Amplify](https://docs.aws.amazon
   - Align models on Contentful with components within the application, the justification for not doing this was due to the application being very bespoke and not changing often, so I could get away with not using the Content Models in a way that would be considered best practice.
 
   - Use a consistent approach to styling and reuse more, I just didn't value this enough to go back and fix it as this was a small project with limited time.
+
+  - Remove unused code
+
+  - Split out complex components into sub components, would make for a much nicer solution but again time constaints made me not go back and fix this.
