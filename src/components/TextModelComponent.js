@@ -43,9 +43,14 @@ const StyledParagraph = styled.p`
     padding: 20px 20px 0px 20px;
     color: white;
     font-size: 18px;
+    word-break: break-all;
 
     &:last-of-type{
         padding: 20px;
+    }
+
+    > a {
+        color: white;
     }
 `
 

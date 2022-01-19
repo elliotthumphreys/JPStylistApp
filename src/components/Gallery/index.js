@@ -76,7 +76,7 @@ const MyGallery = memo(({ images, title }) => {
     }, [])
 
     let maxImageWidth = screenWidth * 1.2;
-    let gutterSize = 5;
+    let gutterSize = 0;
     let columnWidth = (screenWidth / numberOfColumns) - (gutterSize);
 
     return (
