@@ -1,12 +1,13 @@
-import React, { useRef, useState, useEffect, memo } from 'react'
+import React, { useState, useEffect } from 'react'
 import 'photoswipe/dist/photoswipe.css'
 import 'photoswipe/dist/default-skin/default-skin.css'
-import { SpringGrid, layout, makeResponsive } from 'react-stonecutter';
+import { CSSGrid, layout } from 'react-stonecutter';
 import { Gallery, Item } from 'react-photoswipe-gallery'
 import styled from 'styled-components';
 
 const GalleryContainer = styled.div`
     margin: ${props => `${props.margin.y}px ${props.margin.xR ?? props.margin.x}px ${props.margin.y}px ${props.margin.x}px`};
+    width: 100%;
 `
 const Heading1 = styled.h1`
     margin: 0px;
@@ -34,16 +35,10 @@ const Heading1 = styled.h1`
     }
 `
 
-const MyGallery = memo(({ images, title }) => {
+const MyGallery = ({ images, title }) => {
     const [margin, setMargin] = useState({ x: 60, y: 60 });
-
     const [screenWidth, setScreenWidth] = useState(1920);
-
     const [numberOfColumns, setSetNumberOfColumns] = useState(5);
-
-    const Grid = makeResponsive(SpringGrid, {
-        maxWidth: screenWidth
-    });
 
     const setNumberOfColumns = event => {
         if (!window.innerWidth )
@@ -83,13 +78,14 @@ const MyGallery = memo(({ images, title }) => {
         <GalleryContainer margin={margin}>
             <Heading1>{title}</Heading1>
             <Gallery>
-                <Grid
+                <CSSGrid
                     component="ul"
                     columns={numberOfColumns}
                     columnWidth={columnWidth}
                     gutterWidth={gutterSize}
                     gutterHeight={gutterSize}
                     layout={layout.pinterest}
+                    duration={0}
                 >
                     {
                         images.map((image, index) => {
@@ -122,9 +118,9 @@ const MyGallery = memo(({ images, title }) => {
                             )
                         })
                     }
-                </Grid>
+                </CSSGrid>
             </Gallery>
         </GalleryContainer>)
-})
+}
 
 export default MyGallery;
