@@ -416,8 +416,9 @@ export const CategoryImageContainer = styled(Link)`
         opacity: 0.6;
     }
 
-    @media screen and (max-width: 991px){
-        /* margin-left: 20px; */
+    padding-left: 5px;
+    &:first-child {
+        padding-left: 0px;
     }
 `
 export const PaddedDiv = styled.div`
