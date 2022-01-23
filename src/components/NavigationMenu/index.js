@@ -164,6 +164,7 @@ const StyledShitImageContainer = styled.div`
         background-image: url(${props => props.imageurlMobile});
         background-position: ${props => props.positionMobile};
         background-color: ${props => props.colourMobile};
+        background-size: contain;
     }
 `;
 const LandingPage = memo(({
@@ -176,7 +177,7 @@ const LandingPage = memo(({
 }) => {
     const [width, setWidth] = useState(0)
 
-    const setSizes = event => {
+    const setSizes = () => {
         setWidth(Math.round(window.innerWidth * 1.2));
     }
 
@@ -191,7 +192,7 @@ const LandingPage = memo(({
     return <>
         <StyledShitImageContainer
             imageurl={`${landscapeImage.file.url}?fm=jpg&fl=progressive&w=${width}`}
-            imageurlMobile={`${portraitImage.file.url}?fm=jpg&fl=progressive&w=${width}`}
+            imageurlMobile={`${portraitImage.file.url}?fm=jpg&fl=progressive`}
             colour={landscapeImageColour}
             colourMobile={portraitImageColour}
             position={landscapeImagePosition}
