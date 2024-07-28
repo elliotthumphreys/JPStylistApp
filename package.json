@@ -16,32 +16,34 @@
     "deploy": "gatsby build --prefix-paths && gh-pages -d public"
   },
   "dependencies": {
-    "@contentful/rich-text-html-renderer": "^15.4.0",
-    "@contentful/rich-text-react-renderer": "^15.4.0",
-    "@contentful/rich-text-types": "^15.3.6",
-    "@nfront/global-styles": "^1.2.1",
-    "babel-plugin-styled-components": "^1.12.0",
-    "contentful": "^9.1.3",
-    "gatsby": "^3.4.1",
-    "gatsby-plugin-global-styles": "^1.0.17",
-    "gatsby-plugin-google-analytics": "^3.5.0",
-    "gatsby-plugin-image": "^2.0.0",
-    "gatsby-plugin-react-helmet": "^5.2.0",
-    "gatsby-plugin-styled-components": "^4.5.0",
-    "gatsby-source-contentful": "^6.0.0",
-    "photoswipe": "^4.1.3",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
-    "react-helmet": "^6.1.0",
-    "react-native-async-image-animated": "^4.3.0",
-    "react-photoswipe-gallery": "^1.3.6",
-    "react-progressive-image": "^0.6.0",
-    "react-slideshow-image": "^3.4.6",
-    "react-social-icons": "^5.4.0",
-    "react-stonecutter": "^0.3.10",
-    "styled-components": "^5.3.0"
+    "@contentful/rich-text-html-renderer": "15.4.0",
+    "@contentful/rich-text-react-renderer": "15.4.0",
+    "@contentful/rich-text-types": "15.3.6",
+    "@nfront/global-styles": "1.2.1",
+    "babel-plugin-styled-components": "1.12.0",
+    "contentful": "9.1.3",
+    "gatsby": "3.13.1",
+    "gatsby-plugin-global-styles": "1.0.17",
+    "gatsby-plugin-google-analytics": "3.5.0",
+    "gatsby-plugin-image": "2.0.0",
+    "gatsby-plugin-react-helmet": "5.2.0",
+    "gatsby-plugin-styled-components": "4.5.0",
+    "gatsby-source-contentful": "6.0.0",
+    "photoswipe": "4.1.3",
+    "react": "17.0.1",
+    "react-dom": "17.0.1",
+    "react-helmet": "6.1.0",
+    "react-native-async-image-animated": "4.3.0",
+    "react-photoswipe-gallery": "1.3.6",
+    "react-progressive-image": "0.6.0",
+    "react-slideshow-image": "3.4.6",
+    "react-social-icons": "5.4.0",
+    "react-stonecutter": "0.3.10",
+    "styled-components": "5.3.0"
   },
   "devDependencies": {
-    "gh-pages": "^3.2.3"
+    "gh-pages": "3.2.3"
+  }, "resolutions": {
+    "webpack": "5.52.1"
   }
 }
